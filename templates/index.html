@@ -1,0 +1,51 @@
+{% extends "juice/templates/index.html" %}
+{% block hero %}
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<section class="text-center">
+    <h1 class="heading-text" style="font-size: 50px">
+        Zero stress automation
+    </h1>
+    <h3 class="title-text">
+        <b>Peace</b> is a framework to create user friendly software automation.
+    </h3>
+    <div>
+        <a class="github-button" href="https://github.com/azriel91/peace" data-size="large" data-show-count="true"
+            aria-label="Star azriel91/peace on GitHub">Star</a>
+        <a class="github-button" href="https://github.com/azriel91/peace/fork" data-size="large"
+            data-show-count="true" aria-label="Fork azriel91/peace on GitHub">Fork</a>
+    </div>
+</section>
+<img class="hero-image" style="width: 50%" src="/img/dove.svg" />
+
+<div class="explore-more text"
+    onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+    Explore More ⇩
+</div>
+<style>
+    .hero section {
+        padding: 0 5rem;
+    }
+
+    @media screen and (max-width: 768px) {
+        .hero section {
+            padding: 0 2rem;
+        }
+
+        .hero-image {
+            display: none
+        }
+    }
+</style>
+{% endblock hero %}
+
+{% block favicon %}
+    <link rel="icon" type="image/png" href="/favicon.ico">
+{% endblock favicon %}
+
+{% block footer %}
+<footer>
+    <small class="subtext">
+        <a href="https://peace.mk">peace.mk</a> © 2023
+    </small>
+</footer>
+{% endblock footer %}

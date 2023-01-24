@@ -7,6 +7,8 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
+theme = "juice"
+
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
@@ -14,4 +16,10 @@ highlight_code = true
 
 [extra]
 # Put all your custom variables here
-theme = "juice"
+juice_logo_name = "Peace"
+juice_logo_path = "img/dove.svg"
+juice_extra_menu = [
+    { title = "Github", link = "https://github.com/azriel91/peace" },
+    { title = "docs.rs", link = "https://docs.rs/peace" },
+]
+repository_url = "https://github.com/azriel91/peace"
