@@ -1,4 +1,9 @@
 {% extends "juice/templates/index.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ get_url(path="term.css") }}">
+{% endblock head %}
+
 {% block hero %}
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <section class="text-center">

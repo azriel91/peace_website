@@ -1,0 +1,13 @@
+.terminal {
+    line-height: 1.4em;
+
+    .shell {
+        font-weight: bold;
+        color: #77ffcc;
+    }
+}
+
+.terminal-short {
+    height: 10em;
+    overflow-y: scroll;
+}
