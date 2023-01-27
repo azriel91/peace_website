@@ -7,29 +7,222 @@ sort_by = "weight"
 
 # The Peace Advantage
 
-## Constrained Code
+## Visibility
 
 <div>
 
-{% card(id="constrained_code") %}
-```rust
-let current = /* item.read() */;
-let desired = /* config value / clean up */;
-let diff    = /* desired - current */;
+{% card(id="visibility", fixed_width=true) %}
 
-match diff {
-    Self::InSync  => { /* do nothing */ }
-    Self::Partial(p) => amend(p)?,
-    Self::Full |
-    Self::Unknown => current.apply(diff)?,
+<pre class="terminal">
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>status</span>
+Using profile <span style='color:#5fff87'>development</span>
+<span style='color:#5faaff'>app</span>: `web_app` out-of-date
+<span style='color:#5faaff'>server</span>: not exists
+<span style='color:#5faaff'>upload</span>: `web_app` not uploaded
+
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>diff</span>
+<span style='color:#5faaff'>app</span>: `web_app` will be compiled
+<span style='color:#5faaff'>server</span>: will be launched
+<span style='color:#5faaff'>upload</span>: `web_app` will be uploaded
+</pre>
+
+{% end %}
+
+{% card(id="visibility_desc") %}
+Automation is not just about performant execution, but understanding the state of things, and what automation would alter.
+
+Understanding is not "how *much* information can be output", but "how information is *best* presented".
+
+Peace presents the highest value information at a glance, with easy options to go deeper.
+{% end %}
+
+</div>
+
+
+## 🚧 Adaptive Presentation
+
+<div>
+
+{% card(id="adaptive_presentation", fixed_width=true) %}
+
+<pre class="terminal">
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>  <span style='color:#7f7f7f'># interactive</span>
+✅ <span style='color:#5faaff'>app   </span>▕<span style='background:#00af5f'>             </span>▏built in 4s
+🔨 <span style='color:#5faaff'>server</span>▕<span style='background:#0087d7'>    </span><span style='background:#00005f'>         </span>▏el: 7s, eta: 9s
+⏳ <span style='color:#5faaff'>upload</span>▕<span style='background:#000033'>             </span>▏deps: [server]
+
+* To stop, press <span style='color:#bbbbbb'>Ctrl + C</span>
+* For detail, in another terminal run:
+  <span style='color:#5fff87'>envman</span> <span style='color:#bbbbbb'>progress --detail</span>
+</pre>
+
+<pre class="terminal">
+<span style='color:#7f7f7f'># ci</span>
+server | 1/5 |  0s | vm requested
+app    | 1/1 |  4s | built
+server | 2/5 |  7s | os booted
+server | 3/5 | 10s | pkgs installed
+</pre>
+
+{% end %}
+
+{% card(id="adaptive_presentation_desc") %}
+
+<div id="adaptive_presentation_dot"></div>
+
+Peace presents information and actions adaptively:
+
+* Progress presented as bars when used interactively, and single line logs in CI.
+* 🚧 JSON when returned as a web response.
+* 🚧 HTML elements when rendering in a browser -- WASM / web.
+
+{% end %}
+
+</div>
+
+
+## 🚧 Empirical Usability
+
+<div>
+
+{% card(id="empirical_usability", fixed_width=true) %}
+
+<pre class="terminal">
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>
+✅ <span style='color:#5faaff'>app   </span>▕<span style='background:#00af5f'>             </span>▏built in 4s
+⚠️ <span style='color:#5faaff'>server</span>▕<span style='background:#eecc00'>       </span><span style='background:#664400'>      </span>▏el: 33s, eta: 7s
+⏳ <span style='color:#5faaff'>upload</span>▕<span style='background:#000033'>             </span>▏deps: [server]
+
+* To stop, press <span style='color:#bbbbbb'>Ctrl + C</span>
+* For detail, in another terminal run:
+  <span style='color:#5fff87'>envman</span> <span style='color:#bbbbbb'>progress --detail</span>
+
+<span style='color:#eecc00'>⚠️ warn:</span> <span style='color:#5faaff'>server</span> may have stalled.
+  Last message:  <span style='color:#bbbbbb'>(9s ago)</span>
+  <span style='color:#bbbbbb'>Running `sudo apt install -y sysstate` </span>
+</pre>
+
+{% end %}
+
+{% card(id="empirical_usability_desc") %}
+
+Peace automatically tracks execution metrics. This enables:
+
+* **Proactive Outlier Detection:** Prompts based on outliers to historical averages.
+* **Highest Impact Optimization:** Targeting efficiency improvements at the most frequent operations, or the slowest processes.
+
+{% end %}
+
+</div>
+
+
+## 🚧 Understandable Errors
+
+<div>
+
+{% card(id="understandable_errors", fixed_width=true) %}
+
+<pre class="terminal">
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>
+✅ <span style='color:#5faaff'>app   </span>▕<span style='background:#00af5f'>             </span>▏built in 4s
+❌ <span style='color:#5faaff'>server</span>▕<span style='background:#cc0000'>       </span><span style='background:#331111'>      </span>▏el: 33s, eta: 7s
+🚫 <span style='color:#5faaff'>upload</span>▕<span style='background:#331111'>             </span>▏deps: [server]
+
+Error: <span style='color:#e00'>server_package_install</span>
+
+  <span style='color:#e00'>×</span> Server packages failed to install.
+  <span style='color:#e00'>╰─▶</span> Unable to locate package sysstate
+   ╭─[<span style='color:#7df'><b><u>server/config.yaml</u></b></span>:1:1]
+ <span style='opacity:0.67'>1</span> │ packages:
+ <span style='opacity:0.67'>2</span> │ - sysstate
+   · <span style='color:#e0e'><b>  ───┬────</b></span>
+   ·   <span style='color:#e0e'><b>   ╰── defined here</b></span>
+   ╰────
+   <span style='color:#7df'>Help:</span> Ensure spellings are correct
+</pre>
+{% end %}
+
+{% card(id="understandable_errors_desc") %}
+
+Peace is compatible with [`miette`](https://github.com/zkat/miette) by design, presenting errors in the much loved and understood format.
+
+* The source parameter(s) that cause the error is presented to the user, reducing work to find it.
+* Suggestions on how to recover help the user move forward.
+
+🚧 Currently only a few error variants have source information automatically attached.
+
+{% end %}
+
+
+## Execution History
+
+<div>
+
+{% card(id="execution_history", fixed_width=true) %}
+
+<pre class="terminal">
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>log</span>
+profile: <span style='color:#5fff87'>development</span>
+<span style='color:#eeeeee'>2023-01-25+1300</span> <span style='color:#bbbbbb'>(2 days ago)</span>
+* ✅ <span style='color:#5faaff'>8</span> <span style='color:#bbbbbb'>15:28:20</span> envman clean
+* ✅ <span style='color:#5faaff'>7</span> <span style='color:#bbbbbb'>14:56:32</span> envman apply
+* ✅ <span style='color:#5faaff'>6</span> <span style='color:#bbbbbb'>14:48:22</span> envman apply
+* ❌ <span style='color:#5faaff'>5</span> <span style='color:#bbbbbb'>14:47:19</span> envman apply
+* ✅ <span style='color:#5faaff'>4</span> <span style='color:#bbbbbb'>14:31:48</span> envman apply
+<span style='color:#eeeeee'>2023-01-24+1300</span> <span style='color:#bbbbbb'>(3 days ago)</span>
+* ✅ <span style='color:#5faaff'>3</span> <span style='color:#bbbbbb'>17:05:17</span> envman clean
+* ✅ <span style='color:#5faaff'>2</span> <span style='color:#bbbbbb'>16:32:08</span> envman apply
+* ✅ <span style='color:#5faaff'>1</span> <span style='color:#bbbbbb'>16:29:59</span> envman apply
+</pre>
+
+{% end %}
+
+{% card(id="execution_history_desc") %}
+<pre class="terminal">
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>show</span>
+<span style='color:#bbbbbb'>last execution:</span> <span style='color:#5faaff'>8</span>
+<span style='color:#bbbbbb'>command:</span> envman clean
+<span style='color:#eeeeee'>2023-01-25T15:28:20+1300</span> <span style='color:#bbbbbb'>(2 days ago)</span>
+
+<span style='color:#5faaff'>app</span>:    up-to-date    to not-exists
+<span style='color:#5faaff'>server</span>: `abc-103abfe` to None
+<span style='color:#5faaff'>upload</span>: n/a
+</pre>
+
+Peace stores execution summaries in its structured form, making it easy to review what was done, or analyzed with a different presentation.
+{% end %}
+
+</div>
+
+
+## 🚧 Constrained Code
+
+<div>
+
+{% card(id="constrained_code", fixed_width=true) %}
+
+```rust
+trait ItemSpec {
+    type State:  /* .. */;
+    type StateDiff:  /* .. */;
+    async fn state_current(&self, ..) -> _;
+    async fn apply_exec(&self, ..) -> _;
+    /* .. */
+}
+
+impl Presentable for ServerState {
+    fn present(&self, presenter: &Presenter) {
+        presenter
+            .name(self.server_name)
+            .desc(self.server_status)
+    }
 }
 ```
-
-*⛓️ It is these constraints that give us freedom*
 
 {% end %}
 
 {% card(id="constrained_code_desc") %}
+
 Compile time constraints <small>(with all features)</small> means correctness, safety, and ease-of-use by design:
 
 * For every item creation, there is a clean up.
@@ -37,7 +230,10 @@ Compile time constraints <small>(with all features)</small> means correctness, s
 * Item states must be:
     - **Fetchable:** For idempotence, this allows automation to skip to where it stopped.
     - **Presentable:** In short for comprehension, in detail for informed decisions.
-* Constraints enable Peace to provide toggles between command line and web targets.
+* Constraints enable Peace to provide common flows, and adapt information for each target.
+
+*⛓️ It is these constraints that give us freedom*
+
 {% end %}
 
 </div>
@@ -68,68 +264,18 @@ features = [
 🐚 Instead of writing shell scripts, then transitioning to larger tools as complexity grows, existing logic is extended by enabling features in the Peace crate.
 
 ```diff
- async fn exec(
+ async fn apply_exec(
      state_current: Self::State,
      state_desired: Self::State,
 +    state_diff: Self::StateDiff,
  ) -> Result<(), E>
 ```
 
-🦀 *Compilation errors* inform you what code that needs updating.
+🦀 *Compilation errors* show the code that needs updating, you don't have to work to find out.
 
 {% end %}
 
 </div>
-
-## Adaptive Presentation
-
-<div>
-
-{% card(id="adaptive_presentation", fixed_width=true) %}
-
-<div id="adaptive_presentation_dot"></div>
-
-<pre class="terminal">
-<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>  <span style='color:#7f7f7f'># interactive</span>
-<span style='color:#5f87ff'>app   </span>▕<span style='background:#00af5f'>             </span>▏built in 4s
-<span style='color:#5f87ff'>server</span>▕<span style='background:#0087d7'>    </span><span style='background:#00005f'>         </span>▏el: 7s, eta: 9s
-<span style='color:#5f87ff'>upload</span>▕<span style='background:#000033'>             </span>▏deps: [server]
-</pre>
-
-<pre class="terminal">
-<span style='color:#7f7f7f'># ci</span>
-server | 2/5 | 0s | os boot
-server | 2/5 | 7s | os booted
-</pre>
-
-{% end %}
-
-{% card(id="adaptive_presentation_desc") %}
-Peace handles the information and command presentation based on usage.
-
-* Progress presented as bars when used interactively, and single line logs in CI.
-* 🚧 JSON when returned as a web response.
-* 🚧 HTML elements for rendering -- WASM / web.
-* 🚧 Forms for controls in a browser.
-
-{% end %}
-
-</div>
-
-
-## Understandable Errors
-
-Peace is compatible with `miette` by design, presenting errors in the much loved and understood format.
-
-🚧 Currently only a few error variants have source information automatically attached.
-
-
-
-* **Discovery:** Show the current state of all items, and what they would be.
-* **Subset Execution:** Run the automation for these items.
-* **Reverse Execution:** Revert these items to the previous state.
-* **Clean Up:** Track all items that are created, and clean the up.
-* **Interface:** Expose the logic as a command line tool, or web API, or web page.
 
 
 # Building Blocks / Concepts
@@ -176,66 +322,37 @@ Functions can be executed in parallel when their predecessors' executions are co
 
 {% card(id="flows_desc", fixed_width=true) %}
 
-<pre class="terminal">
-<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>status</span>
-Using profile <span style='color:#5fff87'>development</span>
-<span style='color:#5f87ff'>app</span>: `web_app` out-of-date
-<span style='color:#5f87ff'>server</span>: not exists
-<span style='color:#5f87ff'>upload</span>: `web_app` not uploaded
-
-<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>diff</span>
-<span style='color:#5f87ff'>app</span>: `web_app` will be compiled
-<span style='color:#5f87ff'>server</span>: will be launched
-<span style='color:#5f87ff'>upload</span>: `web_app` will be uploaded
-
-<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>
-<span style='color:#5f87ff'>app   </span>▕<span style='background:#00af5f'>             </span>▏built in 4s
-<span style='color:#5f87ff'>server</span>▕<span style='background:#0087d7'>    </span><span style='background:#00005f'>         </span>▏el: 7s, eta: 9s
-<span style='color:#5f87ff'>upload</span>▕<span style='background:#000033'>             </span>▏deps: [server]
-
-For detail, in another terminal run:
-<span style='color:#5fff87'>envman</span> <span style='color:#cccccc'>progress --detail</span>
-</pre>
-
-{% end %}
-
 A flow is a process that fulfills a business question or intent. Within a flow, the appropriate Item Specification *function*(s) are invoked for each *item*.
 
 Examples:
 
-* Discover and show the current state of all items.
-* Show what would change when the automation is executed.
+* Discover and show the state of all items.
+* Show what would change.
 * Execute the automation.
 
-Advanced flows may reverse the execution direction. Examples:
+Advanced flows may invert execution direction:
 
 * `clean` cleans up items in reverse order.
-* `apply` on a *subset* of items may transition some items to the desired state, and clean others.
+* `apply` on a *subset* of items may forward alter some items, and clean others.
+
+{% end %}
 
 </div>
+
 
 # The Peace Disadvantage
 
 *Reasons you would **not** use Peace*
 
-1. Higher levels of automation maturity implies higher cost of developing the automation
+1. Higher automation maturity levels implies higher cost of development:
 
-    Low maturity automation can evolve faster as it has fewer constraints. This is sustainable when the number of users is not high and the cost of higher resilience and usability is not justified.
+    Low maturity automation can evolve faster as it has fewer constraints. This is sustainable when:
 
-2. Rust is not as common a skillset as other languages, and may be more difficult to hire for.
+    - The number of users is not high.
+    - The cost of higher resilience and usability is not justified.
 
+2. Rust is not as common a skillset as other languages, and requires substantial time to learn.
 
-
-# Roadmap
-
-* Idempotent: Run the same command twice
-* Colorized output
-* Progress bars
-* Vertically-sliced functionality by design via crate features
-* Versioning state.
-
-
----
 
 # Inspirations
 
@@ -533,6 +650,7 @@ Vinh Giang is a keynote speaker and excellent communicator. Through his communic
             nodesep   = 0.0
             ranksep   = 0.3
             bgcolor   = "transparent"
+            fontname  = "helvetica"
             fontcolor = "#7f7f7f"
             splines   = line
             rankdir   = LR
@@ -573,17 +691,17 @@ Vinh Giang is a keynote speaker and excellent communicator. Through his communic
         }
 
         b_tooltip [
-                penwidth  = 2
-                shape     = "rectangle"
-                style     = "rounded,filled"
-                color     = "#446699"
-                margin    = 0.1
-                fontname  = "helvetica"
-                fillcolor ="#ccccdd"
-                label = <<b>Elapsed:</b>&nbsp;&nbsp;7s<br align="left"/>
+            penwidth  = 2
+            shape     = "rectangle"
+            style     = "rounded,filled"
+            color     = "#446699"
+            margin    = 0.1
+            fontname  = "helvetica"
+            fillcolor ="#ccccdd"
+            label = <<b>Elapsed:</b>&nbsp;&nbsp;7s<br align="left"/>
 <b>ETA:</b>&nbsp;9s<br align="left"/>
 <b>Message:</b>&nbsp;OS booted<br align="left"/>>
-            ]
+        ]
 
         a -> b
         b -> c
