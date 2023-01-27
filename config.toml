@@ -7,7 +7,7 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
-theme = "juice"
+theme = "hush"
 
 [markdown]
 # Whether to do syntax highlighting
@@ -17,9 +17,9 @@ highlight_theme = "nord"
 
 [extra]
 # Put all your custom variables here
-juice_logo_name = "Peace"
-juice_logo_path = "img/dove.svg"
-juice_extra_menu = [
+hush_logo_name = "Peace"
+hush_logo_path = "img/dove.svg"
+hush_extra_menu = [
     { title = "Github", link = "https://github.com/azriel91/peace" },
     { title = "docs.rs", link = "https://docs.rs/peace" },
 ]
