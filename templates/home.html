@@ -3,6 +3,7 @@
 {% block head %}
 <link rel="stylesheet" href="{{ get_url(path="term.css") }}">
 <link rel="stylesheet" href="{{ get_url(path="card.css") }}">
+<link rel="stylesheet" href="{{ get_url(path="home_sidebar.css") }}">
 {% endblock head %}
 
 {% block hero %}
@@ -73,6 +74,11 @@
 </div>
 {% endif %}
 {% endblock toc %}
+
+<!-- For spacing -->
+{% block sidebar %}
+<div class="sidebar"></div>
+{% endblock sidebar %}
 
 {% block footer %}
 <footer>

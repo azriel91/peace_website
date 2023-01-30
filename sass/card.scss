@@ -10,3 +10,19 @@
     min-width: 380px;
     padding: 10px;
 }
+
+@media screen and (max-width: 1280px) {
+    .card {
+        width: calc(100% - 10px);
+        min-width: 380px;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: calc(100% - 10px);
+        min-width: 380px;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,9 @@
+.sidebar {
+    width: 240px;
+}
+
+@media screen and (max-width: 1280px) {
+    .sidebar {
+        display: none;
+    }
+}

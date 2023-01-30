@@ -13,7 +13,7 @@ sort_by = "weight"
 
 <div class="card_set">
 
-{% card(id="visibility", fixed_width=true) %}
+{% card(id="visibility") %}
 
 <pre class="terminal">
 <span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>status</span>
@@ -45,7 +45,7 @@ Peace presents the highest value information at a glance, with easy options to g
 
 <div class="card_set">
 
-{% card(id="adaptive_presentation", fixed_width=true) %}
+{% card(id="adaptive_presentation") %}
 
 <pre class="terminal">
 <span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>  <span style='color:#7f7f7f'># interactive</span>
@@ -87,7 +87,7 @@ Peace presents information and actions adaptively:
 
 <div class="card_set">
 
-{% card(id="empirical_usability", fixed_width=true) %}
+{% card(id="empirical_usability") %}
 
 <pre class="terminal">
 <span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>
@@ -122,7 +122,7 @@ Peace automatically tracks execution metrics. This enables:
 
 <div class="card_set">
 
-{% card(id="understandable_errors", fixed_width=true) %}
+{% card(id="understandable_errors") %}
 
 <pre class="terminal">
 <span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>
@@ -162,7 +162,7 @@ Peace is compatible with [`miette`](https://github.com/zkat/miette) by design, p
 
 <div class="card_set">
 
-{% card(id="execution_history", fixed_width=true) %}
+{% card(id="execution_history") %}
 
 <pre class="terminal">
 <span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>log</span>
@@ -203,7 +203,7 @@ Peace stores execution summaries in its structured form, making it easy to revie
 
 <div class="card_set">
 
-{% card(id="constrained_code", fixed_width=true) %}
+{% card(id="constrained_code") %}
 
 ```rust
 trait ItemSpec {
@@ -247,7 +247,7 @@ Compile time constraints <small>(with all features)</small> means correctness, s
 
 <div class="card_set">
 
-{% card(id="constrained_code", fixed_width=true) %}
+{% card(id="constrained_code") %}
 ```toml
 [dependencies.peace]
 version = "0.0.?"
@@ -287,7 +287,7 @@ features = [
 ## Item Specification
 
 <div class="card_set">
-{{ card(id="item_spec_dot", fixed_width=true) }}
+{{ card(id="item_spec_dot") }}
 {% card(id="item_spec_desc") %}
 
 A collection of functions to manage an *item*, e.g. application compilation, file upload, server existence.
@@ -308,7 +308,7 @@ Base functions:
 ## Item Specification Graph
 
 <div class="card_set">
-{{ card(id="item_spec_graph_dot", fixed_width=true) }}
+{{ card(id="item_spec_graph_dot") }}
 {% card(id="item_spec_graph_desc") %}
 
 A [directed graph](https://en.wikipedia.org/wiki/Directed_graph) of **Item Spec**s. Edges indicate forward execution order.
@@ -323,9 +323,9 @@ Functions can be executed in parallel when their predecessors' executions are co
 
 <div class="card_set">
 
-{{ card(id="flows_dot", fixed_width=true) }}
+{{ card(id="flows_dot") }}
 
-{% card(id="flows_desc", fixed_width=true) %}
+{% card(id="flows_desc") %}
 
 A flow is a process that fulfills a business question or intent. Within a flow, the appropriate Item Specification *function*(s) are invoked for each *item*.
 
