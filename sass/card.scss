@@ -1,0 +1,12 @@
+.card_set {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    width: calc(50% - 30px);
+    min-width: 380px;
+    padding: 10px;
+}

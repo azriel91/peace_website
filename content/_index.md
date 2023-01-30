@@ -1,5 +1,7 @@
 +++
 title = "Peace"
+template = "home.html"
+insert_anchor_links = "heading"
 sort_by = "weight"
 +++
 
@@ -9,7 +11,7 @@ sort_by = "weight"
 
 ## Visibility
 
-<div>
+<div class="card_set">
 
 {% card(id="visibility", fixed_width=true) %}
 
@@ -41,7 +43,7 @@ Peace presents the highest value information at a glance, with easy options to g
 
 ## 🚧 Adaptive Presentation
 
-<div>
+<div class="card_set">
 
 {% card(id="adaptive_presentation", fixed_width=true) %}
 
@@ -83,7 +85,7 @@ Peace presents information and actions adaptively:
 
 ## 🚧 Empirical Usability
 
-<div>
+<div class="card_set">
 
 {% card(id="empirical_usability", fixed_width=true) %}
 
@@ -118,7 +120,7 @@ Peace automatically tracks execution metrics. This enables:
 
 ## 🚧 Understandable Errors
 
-<div>
+<div class="card_set">
 
 {% card(id="understandable_errors", fixed_width=true) %}
 
@@ -153,10 +155,12 @@ Peace is compatible with [`miette`](https://github.com/zkat/miette) by design, p
 
 {% end %}
 
+</div>
+
 
 ## Execution History
 
-<div>
+<div class="card_set">
 
 {% card(id="execution_history", fixed_width=true) %}
 
@@ -197,7 +201,7 @@ Peace stores execution summaries in its structured form, making it easy to revie
 
 ## 🚧 Constrained Code
 
-<div>
+<div class="card_set">
 
 {% card(id="constrained_code", fixed_width=true) %}
 
@@ -241,7 +245,7 @@ Compile time constraints <small>(with all features)</small> means correctness, s
 
 ## 🚧 Incremental Maturity
 
-<div>
+<div class="card_set">
 
 {% card(id="constrained_code", fixed_width=true) %}
 ```toml
@@ -282,7 +286,7 @@ features = [
 
 ## Item Specification
 
-<div>
+<div class="card_set">
 {{ card(id="item_spec_dot", fixed_width=true) }}
 {% card(id="item_spec_desc") %}
 
@@ -303,7 +307,7 @@ Base functions:
 
 ## Item Specification Graph
 
-<div>
+<div class="card_set">
 {{ card(id="item_spec_graph_dot", fixed_width=true) }}
 {% card(id="item_spec_graph_desc") %}
 
@@ -317,7 +321,8 @@ Functions can be executed in parallel when their predecessors' executions are co
 
 ## Flows
 
-<div>
+<div class="card_set">
+
 {{ card(id="flows_dot", fixed_width=true) }}
 
 {% card(id="flows_desc", fixed_width=true) %}
