@@ -8,6 +8,10 @@ compile_sass = true
 build_search_index = true
 
 theme = "hush"
+taxonomies = [
+    { name = "tags" },           # Keep this
+    { name = "categories" },     # Keep this
+]
 
 [markdown]
 # Whether to do syntax highlighting
@@ -24,3 +28,4 @@ hush_extra_menu = [
     { title = "docs.rs", link = "https://docs.rs/peace" },
 ]
 repository_url = "https://github.com/azriel91/peace"
+hush_exclude_menu = []
