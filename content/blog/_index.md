@@ -1,5 +1,5 @@
 +++
-title = "Blog"
+title = "🪶 Blog"
 description = "The thought pieces behind this project"
 template = "blog.html"
 page_template = "blog_post.html"
