@@ -5,7 +5,14 @@ insert_anchor_links = "heading"
 sort_by = "weight"
 +++
 
+> 🚧 **Important:**
+>
+> Peace is a work in progress, and this website serves to communicate vision.
+>
+> Approximately 10% of the features listed on this page are implemented; a substantial amount of the completed work has been foundational and exploration.
+
 **Peace** is a framework to build robust, *understandable* software automation, incrementally.
+
 
 # The Peace Advantage
 
@@ -41,7 +48,7 @@ Peace presents the highest value information at a glance, with easy options to g
 </div>
 
 
-## 🚧 Adaptive Presentation
+## Adaptive Presentation
 
 <div class="card_set">
 
@@ -75,15 +82,15 @@ server | 3/5 | 10s | pkgs installed
 Peace presents information and actions adaptively:
 
 * Progress presented as bars when used interactively, and single line logs in CI.
-* 🚧 JSON when returned as a web response.
-* 🚧 HTML elements when rendering in a browser -- WASM / web.
+* JSON when returned as a web response.
+* HTML elements when rendered in a browser -- WASM / web application.
 
 {% end %}
 
 </div>
 
 
-## 🚧 Empirical Usability
+## Empirical Usability
 
 <div class="card_set">
 
@@ -118,7 +125,7 @@ Peace automatically tracks execution metrics. This enables:
 </div>
 
 
-## 🚧 Understandable Errors
+## Understandable Errors
 
 <div class="card_set">
 
@@ -146,12 +153,12 @@ Error: <span style='color:#e00'>server_package_install</span>
 
 {% card(id="understandable_errors_desc") %}
 
-Peace is compatible with [`miette`](https://github.com/zkat/miette) by design, presenting errors in the much loved and understood format.
+Peace presents errors in the much loved Rust compiler error format, through compatibility with [`miette`](https://github.com/zkat/miette) by design.
 
-* The source parameter(s) that cause the error is presented to the user, reducing work to find it.
+* The source parameter(s) that cause the error are presented to the user, reducing work to find it.
 * Suggestions on how to recover help the user move forward.
 
-🚧 Currently only a few error variants have source information automatically attached.
+People don't feel lost when what they do doesn't work; they feel lost when they don't have a way to move forward.
 
 {% end %}
 
@@ -199,7 +206,7 @@ Peace stores execution summaries in its structured form, making it easy to revie
 </div>
 
 
-## 🚧 Constrained Code
+## Constrained Code
 
 <div class="card_set">
 
@@ -243,7 +250,7 @@ Compile time constraints <small>(with all features)</small> means correctness, s
 </div>
 
 
-## 🚧 Incremental Maturity
+## Incremental Maturity
 
 <div class="card_set">
 
@@ -361,21 +368,22 @@ Advanced flows may invert execution direction:
 
 # Inspirations
 
-## Rust
+## People
 
-Rust's compilation errors are presented in a way that makes the users feel understood. Users don't feel lost when their input is wrong; they feel lost when they don't have a way to move forward.
+Through working with many people across different roles, it is apparent that a lot of issues when working with automation can be solved through clearer and more understandable communication &ndash; a dimension that deserves more attention in automation tooling.
 
 
 ## Git
 
 Git allows one to show the state of local and remote repositories, diff them, before committing and pushing the changes. Pushes are atomic and idempotent, meaning running the same command multiple times, whether or not the operation succeeded prior, has the same result.
 
-The idea spawned from this is, instead of file content being the state, and patches being the diff, why not something -- *anything* -- user defined?
+The idea spawned from this is, instead of file content as the state, and patches being the diff, why not something &ndash; *anything* &ndash; user defined?
 
 
-## People
+## Rust
 
-Vinh Giang is a keynote speaker and excellent communicator. Through his communications course, I realized that a lot of issues with automation can be solved by communicating clearly and understandably with the end users.
+Rust's commitment to helping people learn, with clear explanations and examples, demonstrates that taking care of people is a priority that should not be left behind amidst technical advancement.
+
 
 <script type="module">
     import { Graphviz } from "https://cdn.jsdelivr.net/npm/@hpcc-js/wasm/dist/graphviz.js";
