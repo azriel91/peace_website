@@ -14,25 +14,191 @@ jobs:
     if: github.ref != 'refs/heads/main'
     timeout-minutes: 10
     steps:
-      - name: 'checkout'
-        uses: actions/checkout@v3
-      - name: 'build'
-        uses: shalzz/zola-deploy-action@v0.16.1-1
-        env:
-          PAGES_BRANCH: gh-pages
-          CHECK_LINKS: true
-          BUILD_ONLY: true
+    - name: 'Checkout peace_website repository'
+      uses: actions/checkout@v3
+      with:
+        path: 'peace_website'
+
+    - name: 'Checkout peace repository'
+      uses: actions/checkout@v3
+      with:
+        repository: 'azriel91/peace'
+        path: 'peace'
+
+    - name: 'Install Rust'
+      # FIXME: Switch back when actions-rs/toolchain#{209,220,222} is merged
+      uses: r3-os/actions-rust-toolchain@a862b6623c178b43a3135516442a5f72fb5c1877
+      with:
+        profile: minimal
+        toolchain: stable
+        override: true
+
+    - name: 'Install `wasm-pack`'
+      uses: jetli/wasm-pack-action@v0.4.0
+      with:
+        version: 'v0.10.3'
+
+    - name: 'Install Graphviz'
+      uses: ts-graphviz/setup-graphviz@v1
+
+    # install mdbook-graphviz
+    - name: mdbook-graphviz Cache
+      id: mdbook_graphviz_cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cargo/bin/mdbook-graphviz
+        key: ${{ runner.os }}-mdbook-graphviz
+
+    - name: 'Install `mdbook-graphviz`'
+      # FIXME: Switch back when actions-rs/cargo#217 gets merged
+      uses: r3-os/actions-rust-cargo@fb222fe18dc90e381546d012f9e3d6f353f0f627
+      if: steps.mdbook_graphviz_cache.outputs.cache-hit != 'true'
+      with:
+        command: install
+        args: mdbook-graphviz --version 0.1.4
+
+    # install mdbook
+    - name: Install `mdbook`
+      uses: peaceiris/actions-mdbook@v1
+      with:
+        mdbook-version: latest
+
+    # build WASM examples
+    #
+    # Backtrack 3 layers of directories relative to example dir:
+    #
+    # * examples
+    # * peace (repo)
+    # * github agent dir
+    - name: 'Build WASM examples'
+      working-directory: peace
+      run: |
+        for example in $(ls examples)
+        do wasm-pack build \
+          --target web \
+          --out-dir "../../../peace_website/static/book/examples/pkg" \
+          --release \
+          "examples/${example}" \
+          --features 'error_reporting output_colorized output_json'
+        done
+
+    # Build and publish book
+    #
+    # Backtrack 2 layers of directories relative to `doc` directory:
+    #
+    # * peace (repo)
+    # * github agent dir
+    - name: Build book
+      working-directory: peace
+      run: mdbook build doc -d ../../peace_website/static/book
+
+    # We *do* want to include the built wasm files.
+    - name: 'Remove WASM artifacts .gitignore'
+      working-directory: peace_website
+      run: rm -f ./static/book/examples/pkg/.gitignore
+
+    - name: 'Build zola site'
+      uses: shalzz/zola-deploy-action@v0.16.1-1
+      env:
+        BUILD_DIR: peace_website  # working-directory is not supported when using `uses`
+        PAGES_BRANCH: gh-pages
+        # Unnecessary for build only
+        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CHECK_LINKS: true
+        BUILD_ONLY: true
 
   build_and_deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     timeout-minutes: 10
     steps:
-      - name: 'checkout'
-        uses: actions/checkout@v3
-      - name: 'build and deploy'
-        uses: shalzz/zola-deploy-action@v0.16.1-1
-        env:
-          PAGES_BRANCH: gh-pages
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CHECK_LINKS: true
+    - name: 'Checkout peace_website repository'
+      uses: actions/checkout@v3
+      with:
+        path: 'peace_website'
+
+    - name: 'Checkout peace repository'
+      uses: actions/checkout@v3
+      with:
+        repository: 'azriel91/peace'
+        path: 'peace'
+
+    - name: 'Install Rust'
+      # FIXME: Switch back when actions-rs/toolchain#{209,220,222} is merged
+      uses: r3-os/actions-rust-toolchain@a862b6623c178b43a3135516442a5f72fb5c1877
+      with:
+        profile: minimal
+        toolchain: stable
+        override: true
+
+    - name: 'Install `wasm-pack`'
+      uses: jetli/wasm-pack-action@v0.4.0
+      with:
+        version: 'v0.10.3'
+
+    - name: 'Install Graphviz'
+      uses: ts-graphviz/setup-graphviz@v1
+
+    # install mdbook-graphviz
+    - name: mdbook-graphviz Cache
+      id: mdbook_graphviz_cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cargo/bin/mdbook-graphviz
+        key: ${{ runner.os }}-mdbook-graphviz
+
+    - name: 'Install `mdbook-graphviz`'
+      # FIXME: Switch back when actions-rs/cargo#217 gets merged
+      uses: r3-os/actions-rust-cargo@fb222fe18dc90e381546d012f9e3d6f353f0f627
+      if: steps.mdbook_graphviz_cache.outputs.cache-hit != 'true'
+      with:
+        command: install
+        args: mdbook-graphviz --version 0.1.4
+
+    # install mdbook
+    - name: Install `mdbook`
+      uses: peaceiris/actions-mdbook@v1
+      with:
+        mdbook-version: latest
+
+    # build WASM examples
+    #
+    # Backtrack 3 layers of directories relative to example dir:
+    #
+    # * examples
+    # * peace (repo)
+    # * github agent dir
+    - name: 'Build WASM examples'
+      working-directory: peace
+      run: |
+        for example in $(ls examples)
+        do wasm-pack build \
+          --target web \
+          --out-dir "../../../peace_website/static/book/examples/pkg" \
+          --release \
+          "examples/${example}" \
+          --features 'error_reporting output_colorized output_json'
+        done
+
+    # Build and publish book
+    #
+    # Backtrack 2 layers of directories relative to `doc` directory:
+    #
+    # * peace (repo)
+    # * github agent dir
+    - name: Build book
+      working-directory: peace_website
+      run: mdbook build ../peace/doc -d ../../peace_website/static/book
+
+    # We *do* want to include the built wasm files.
+    - name: 'Remove WASM artifacts .gitignore'
+      working-directory: peace_website
+      run: rm -f ./static/book/examples/pkg/.gitignore
+
+    - name: 'Build zola site and deploy'
+      uses: shalzz/zola-deploy-action@v0.16.1-1
+      env:
+        BUILD_DIR: peace_website  # working-directory is not supported when using `uses`
+        PAGES_BRANCH: gh-pages
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CHECK_LINKS: true
