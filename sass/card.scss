@@ -7,8 +7,14 @@
 
 .card {
     width: calc(50% - 30px);
-    min-width: 380px;
     padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .static_size {
+        transform-origin: top left;
+        transform: scale(0.75);
+    }
 }
 
 @media screen and (max-width: 1280px) {
@@ -21,8 +27,8 @@
 
 @media screen and (max-width: 768px) {
     .card {
-        width: calc(100% - 10px);
-        min-width: 380px;
+        width: calc(100% - 20px);
+        min-width: 280px;
         padding: 10px;
     }
 }

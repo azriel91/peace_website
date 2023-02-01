@@ -7,7 +7,7 @@ sort_by = "weight"
 
 > 🚧 **Important:**
 >
-> Peace is a work in progress, and this website serves to communicate vision.
+> Peace is a work in progress, and this website serves to communicate the project vision.
 >
 > Approximately 10% of the features listed on this page are implemented; a substantial amount of the completed work has been foundational and exploration.
 
@@ -77,7 +77,7 @@ server | 3/5 | 10s | pkgs installed
 
 {% card(id="adaptive_presentation_desc") %}
 
-<div id="adaptive_presentation_dot"></div>
+<div id="adaptive_presentation_dot" class="static_size"></div>
 
 Peace presents information and actions adaptively:
 
@@ -294,7 +294,7 @@ features = [
 ## Item Specification
 
 <div class="card_set">
-{{ card(id="item_spec_dot") }}
+{{ card(id="item_spec_dot", class="static_size") }}
 {% card(id="item_spec_desc") %}
 
 A collection of functions to manage an *item*, e.g. application compilation, file upload, server existence.
@@ -315,7 +315,7 @@ Base functions:
 ## Item Specification Graph
 
 <div class="card_set">
-{{ card(id="item_spec_graph_dot") }}
+{{ card(id="item_spec_graph_dot", class="static_size") }}
 {% card(id="item_spec_graph_desc") %}
 
 A [directed graph](https://en.wikipedia.org/wiki/Directed_graph) of **Item Spec**s. Edges indicate forward execution order.
@@ -330,7 +330,7 @@ Functions can be executed in parallel when their predecessors' executions are co
 
 <div class="card_set">
 
-{{ card(id="flows_dot") }}
+{{ card(id="flows_dot", class="static_size") }}
 
 {% card(id="flows_desc") %}
 
