@@ -6,10 +6,11 @@ on:
     branches:
       - '**'
 
-name: Build and deploy GH Pages
+name: Publish
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/main'
     timeout-minutes: 10
@@ -109,6 +110,7 @@ jobs:
         BUILD_ONLY: true
 
   build_and_deploy:
+    name: Build and Publish
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     timeout-minutes: 10
