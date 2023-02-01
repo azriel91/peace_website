@@ -690,17 +690,17 @@ Rust's commitment to helping people learn, with clear explanations and examples,
 
         subgraph cluster_a {
             a [color="#449966" fillcolor="#88cc88" label = <<b>a</b>>]
-            a_text [shape="plain" style="none" fontcolor="#eeeeff" label = <app>]
+            a_text [shape="plain" style="none" fontcolor="#7f7f7f" label = <app>]
         }
         subgraph cluster_b {
             margin = 0
 
             b [color="#446699" fillcolor="#88aacc" label = <<b>b</b>>]
-            b_text [shape="plain" style="none" fontcolor="#eeeeff" label = <server>]
+            b_text [shape="plain" style="none" fontcolor="#7f7f7f" label = <server>]
         }
         subgraph cluster_c {
             c [label = <<b>c</b>>]
-            c_text [shape="plain" style="none" fontcolor="#eeeeff" label = <upload>]
+            c_text [shape="plain" style="none" fontcolor="#7f7f7f" label = <upload>]
         }
 
         b_tooltip [
