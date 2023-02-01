@@ -20,7 +20,7 @@ For each of the following dimensions, there is one short term and one long term 
 
 ## Development
 
-* **Item Spec Feature Gates:** Refactor Item Spec for less future rework.
+* **Item Spec Feature Gates:** Refactor Item Spec for easier uptake and less future rework.
 * **App Cycle End-to-End Example:** Demonstrates time and cost savings, ease of use.
 
 
@@ -32,8 +32,9 @@ For each of the following dimensions, there is one short term and one long term 
 
 # Ideas / Roadmap
 
-The following ideas are worth entertaining each time a short term / long term milestone is fulfilled.
+Each time a short term or long term milestone is fulfilled, one of the following will take its place:
 
+* **Apply Command:** Combine ensure / clean commands to enable clean diff and mixed apply.
 * **Web UI:** Present and interact with flows in a browser.
 * **Execution History:** Store and show *write* command execution history.
 * **Tutorials:** Document how to write automation tools using Peace.
