@@ -98,9 +98,10 @@ jobs:
       run: rm -f ./static/book/examples/pkg/.gitignore
 
     - name: 'Build zola site'
-      uses: shalzz/zola-deploy-action@v0.16.1-1
+      # FIXME: Switch back when shalzz/zola-deploy-action#{48,60} are merged
+      uses: azriel91/zola-deploy-action@c173cc16a229df050138ef27d37136329683f304
       env:
-        BUILD_DIR: peace_website  # working-directory is not supported when using `uses`
+        WORKING_DIR: peace_website
         PAGES_BRANCH: gh-pages
         # Unnecessary for build only
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -196,9 +197,10 @@ jobs:
       run: rm -f ./static/book/examples/pkg/.gitignore
 
     - name: 'Build zola site and deploy'
-      uses: shalzz/zola-deploy-action@v0.16.1-1
+      # FIXME: Switch back when shalzz/zola-deploy-action#{48,60} are merged
+      uses: azriel91/zola-deploy-action@c173cc16a229df050138ef27d37136329683f304
       env:
-        BUILD_DIR: peace_website  # working-directory is not supported when using `uses`
+        WORKING_DIR: peace_website
         PAGES_BRANCH: gh-pages
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         CHECK_LINKS: true
