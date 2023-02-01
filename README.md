@@ -1,6 +1,6 @@
 # 🕊️ Peace Website &ndash; <https://peace.mk>
 
-[![website CI](https://github.com/azriel91/peace/workflows/website/badge.svg)](https://github.com/azriel91/peace/actions/workflows/website.yml)
+[![website CI](https://github.com/azriel91/peace_website/workflows/website/badge.svg)](https://github.com/azriel91/peace_website/actions/workflows/website.yml)
 
 Website for the [Peace automation framework](https://github.com/azriel91/peace).
 
