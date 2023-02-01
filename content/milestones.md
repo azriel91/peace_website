@@ -15,7 +15,7 @@ For each of the following dimensions, there is one short term and one long term 
 ## Finance
 
 * **Full-Time Employment:** Allows an average of 4 hours of Peace development per week.
-* **10000 USD/month Sponsorship:** Full time Peace development.
+* **7500 USD/month Sponsorship:** Full time Peace development.
 
 
 ## Development
