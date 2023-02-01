@@ -28,7 +28,6 @@ hush_extra_menu = [
     { title = "Discord", link = "https://discord.gg/R6HcASbYAj" },
     { title = "Github", link = "https://github.com/azriel91/peace" },
     { title = "Book", link = "/book/introduction.html" },
-    { title = "API", link = "https://docs.rs/peace" },
 ]
 repository_url = "https://github.com/azriel91/peace"
 hush_exclude_menu = []
