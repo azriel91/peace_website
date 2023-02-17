@@ -32,10 +32,7 @@ struct Cmd {
 struct Profile(String);
 ```
 
-We will compare a runtime safe builder API to a compile-time safe builder API:
-
-
-* **Compile Time Safe:** `ProfileSelection` is a type parameter, and `builder.build()` is not callable until the profile is set, which alters the builder's type state.
+We will compare a runtime safe builder API to a compile-time safe builder API.
 
 
 ### Runtime Safe
