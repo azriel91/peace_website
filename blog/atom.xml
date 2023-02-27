@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Peace - Zero Stress Automation - 🪶 Blog</title>
+	<link href="https://peace.mk/blog/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://peace.mk/blog/"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2023-02-17T00:00:00+00:00</updated>
+	<id>https://peace.mk/blog/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Compile Time Correctness: Type State</title>
+		<published>2023-02-17T00:00:00+00:00</published>
+		<updated>2023-02-17T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://peace.mk/blog/compile-time-correctness-type-state/" type="text/html"/>
+		<id>https://peace.mk/blog/compile-time-correctness-type-state/</id>
+		<content type="html">&lt;blockquote&gt;
+&lt;p&gt;This post is code heavy, and is best viewed on a large screen.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Recently I have gotten into &amp;quot;compile-time-safe-but-still-ergonomic&amp;quot; API obsession.&lt;&#x2F;p&gt;
+&lt;p&gt;This post will demonstrate an implementation of the type state design pattern, where methods are not able to be called until calling them is a valid operation.&lt;&#x2F;p&gt;
+&lt;p&gt;Future posts will cover how maintaining compile-time safety &lt;em&gt;while keeping the API ergonomic&lt;&#x2F;em&gt; becomes increasingly difficult to maintain, and approaches used to address these burdens.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;builder-api-runtime-safety-vs-compile-time-safety&quot;&gt;Builder API: Runtime Safety vs Compile Time Safety&lt;&#x2F;h2&gt;
+&lt;p&gt;For starters, let&#x27;s look at a simple case of creating a compile-time safe API using type state.&lt;&#x2F;p&gt;
+&lt;p&gt;We want to create a &lt;code&gt;Cmd&lt;&#x2F;code&gt; that contains the following two fields:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Cmd &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; Profile,
+&lt;&#x2F;span&gt;&lt;span&gt;    other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Profile&lt;&#x2F;span&gt;&lt;span&gt;(String)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We will compare a runtime safe builder API to a compile-time safe builder API.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;runtime-safe&quot;&gt;Runtime Safe&lt;&#x2F;h3&gt;
+&lt;p&gt;For this API, this is the usage we want to end up with:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Ok!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(Profile(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;quot;profile&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;unwrap&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Runtime error!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;unwrap&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; thread &amp;#39;main&amp;#39; panicked at &amp;#39;called `Result::unwrap()` on an `Err` value: &amp;quot;Cmd profile must be selected&amp;quot;&amp;#39;, src&#x2F;main.rs:11:10
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Notably, &lt;code&gt;builder.build()&lt;&#x2F;code&gt; may fail at runtime, but it is &amp;quot;runtime safe&amp;quot; because it isn&#x27;t possible to have a &lt;code&gt;Cmd&lt;&#x2F;code&gt; without unwrapping the result. At compile time, an API consumer is informed that &amp;quot;this is fallible&amp;quot; through a &lt;code&gt;Result&amp;lt;Cmd, String&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This &lt;code&gt;CmdBuilder&lt;&#x2F;code&gt; API has the following:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;new&lt;&#x2F;code&gt; function which initializes the profile to a placeholder &amp;quot;unset&amp;quot; value.&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;with_profile&lt;&#x2F;code&gt; function which sets the profile.&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;build&lt;&#x2F;code&gt; function which fails if the profile has not been set.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Code:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ProfileSelection &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;None&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    Value(Profile)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;CmdBuilder &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; ProfileSelection,
+&lt;&#x2F;span&gt;&lt;span&gt;    other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;new&lt;&#x2F;span&gt;&lt;span&gt;(other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span&gt;ProfileSelection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;None&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;mut &lt;&#x2F;span&gt;&lt;span&gt;self, profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; Profile) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;self.&lt;&#x2F;span&gt;&lt;span&gt;profile_selection &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;ProfileSelection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;Value(profile)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;self
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(self) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Result&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;Cmd, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;String&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Deconstruct self.
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= self&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; profile &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= match&lt;&#x2F;span&gt;&lt;span&gt; profile_selection {
+&lt;&#x2F;span&gt;&lt;span&gt;            ProfileSelection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;None &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;=&amp;gt; return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Err&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;quot;Cmd profile must be selected&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            ProfileSelection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;Value(profile) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;=&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Ok&lt;&#x2F;span&gt;&lt;span&gt;(Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        })
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[allow(dead_code)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Cmd &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; Profile,
+&lt;&#x2F;span&gt;&lt;span&gt;    other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Profile&lt;&#x2F;span&gt;&lt;span&gt;(String)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;compile-time-safe&quot;&gt;Compile Time Safe&lt;&#x2F;h3&gt;
+&lt;p&gt;For this API, this is the usage we want to end up with:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Ok!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(Profile(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;quot;profile&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Compile error!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F;    |                         ^^^^^ method not found in `CmdBuilder&amp;lt;ProfileSelectionNone&amp;gt;`
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; ...
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; 15 | struct CmdBuilder&amp;lt;ProfileSelection&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F;    | -------------------------------------- method `build` not found for this struct
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F;    |
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F;    = note: the method was found for
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F;            - `CmdBuilder&amp;lt;ProfileSelectionValue&amp;gt;`
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In this case, &lt;code&gt;builder.build()&lt;&#x2F;code&gt; is not fallible -- it returns a &lt;code&gt;Cmd&lt;&#x2F;code&gt;  instead of a &lt;code&gt;Result&amp;lt;Cmd, _&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This &lt;code&gt;CmdBuilder&lt;&#x2F;code&gt; API has the following:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;new&lt;&#x2F;code&gt; function which exists for an unset profile type state.&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;with_profile&lt;&#x2F;code&gt; function which sets the profile for that type state.&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;build&lt;&#x2F;code&gt; function cannot even be called if the profile isn&#x27;t set.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;with_profile&lt;&#x2F;code&gt; cannot be called twice, making it impossible for overwrites.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;With this approach, an API consumer does not have to propagate the error up to the user, because &lt;em&gt;there is none&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Code:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Type states
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ProfileSelectionNone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ProfileSelectionValue&lt;&#x2F;span&gt;&lt;span&gt;(Profile)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;ProfileSelection&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; ProfileSelection,
+&lt;&#x2F;span&gt;&lt;span&gt;    other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionNone&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;new&lt;&#x2F;span&gt;&lt;span&gt;(other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; ProfileSelectionNone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(self, profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; Profile) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionValue&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= self&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; profile_selection &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; ProfileSelectionValue(profile)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        CmdBuilder {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionValue&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(self) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Deconstruct self.
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; ProfileSelectionValue(profile)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= self&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[allow(dead_code)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Cmd &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; Profile,
+&lt;&#x2F;span&gt;&lt;span&gt;    other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;Profile&lt;&#x2F;span&gt;&lt;span&gt;(String)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;more-variants&quot;&gt;More Variants&lt;&#x2F;h2&gt;
+&lt;p&gt;Seems nice. What if there are more variants to selecting a profile?&lt;&#x2F;p&gt;
+&lt;p&gt;The following shows what it would be like to add more variants while keeping compile-time safety:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;First, we need to add another type state type.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;diff&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-diff &quot;&gt;&lt;code class=&quot;language-diff&quot; data-lang=&quot;diff&quot;&gt;&lt;span&gt; &#x2F;&#x2F; Type states
+&lt;&#x2F;span&gt;&lt;span&gt; struct ProfileSelectionNone;
+&lt;&#x2F;span&gt;&lt;span&gt; struct ProfileSelectionValue(Profile);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;+&#x2F;&#x2F;&#x2F; Use the last used profile
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;+struct ProfileSelectionLastUsed;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Next, add behaviour to the relevant &lt;code&gt;impl&lt;&#x2F;code&gt; blocks:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionNone&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; fn new ..
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; fn with_profile ..
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;with_profile_last_used&lt;&#x2F;span&gt;&lt;span&gt;(self) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionLastUsed&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= self&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; profile_selection &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; ProfileSelectionLastUsed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        CmdBuilder {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionValue&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(self) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; ..
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionLastUsed&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(self, last_used_values&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;LastUsedValues) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Deconstruct self.
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;:&lt;&#x2F;span&gt;&lt;span&gt; ProfileSelectionLastUsed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= self&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; profile &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; last_used_values&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;clone&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The API consumer now has a different &lt;code&gt;build&lt;&#x2F;code&gt; method signature when a last used profile is selected:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Ok!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(Profile(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;quot;profile&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; Ok!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; last_used_values &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;LastUsedValues&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;new(Profile(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;quot;profile&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()))&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span&gt;new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;with_profile_last_used&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(last_used_values)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In a way, this syntactically looks like method overloading.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;joy&quot;&gt;Joy&lt;&#x2F;h2&gt;
+&lt;p&gt;A nice benefit from compile time safe APIs is, the compiler &#x2F; LSP shows the API consumer what methods can be called from a particular type state. This means even if there is no internet access, one is not lost!&lt;&#x2F;p&gt;
+&lt;p&gt;Instead of every error making you wonder, &amp;quot;what&#x27;s going on?&amp;quot;, every error is the right step forward.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;problems&quot;&gt;Problems&lt;&#x2F;h2&gt;
+&lt;p&gt;While this pattern is great at reducing bugs, applying this pattern to many parameters on the builder is syntax-heavy.&lt;&#x2F;p&gt;
+&lt;p&gt;For example, if there are three fields that must all be set before &lt;code&gt;build()&lt;&#x2F;code&gt; can be called, then &lt;code&gt;CmdBuilder&lt;&#x2F;code&gt; can either have:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;One type parameter, with &lt;code&gt;N1 * N2 * N3&lt;&#x2F;code&gt; different structs as type state:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; `ParamTs`es
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamOneUnset_ParamTwoUnset_ParamThreeUnset&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamOneSet_ParamTwoUnset_ParamThreeUnset&lt;&#x2F;span&gt;&lt;span&gt;(ParamOneValue)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamOneUnset_ParamTwoSet_ParamThreeUnset&lt;&#x2F;span&gt;&lt;span&gt;(ParamTwoValue)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamOneSet_ParamTwoSet_ParamThreeUnset&lt;&#x2F;span&gt;&lt;span&gt;(ParamOneValue, ParamTwoValue)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; ..
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;ParamTs&amp;gt; { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;* .. *&#x2F; &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This leads to a quadratic number of &lt;code&gt;impl&lt;&#x2F;code&gt; blocks. &lt;em&gt;shudders&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Quite unwieldly.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;A type parameter for each parameter:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamOneUnset&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamOneSet&lt;&#x2F;span&gt;&lt;span&gt;(ParamOneValue)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamTwoUnset&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamTwoSet&lt;&#x2F;span&gt;&lt;span&gt;(ParamTwoValue)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamThreeUnset&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;ParamThreeSet&lt;&#x2F;span&gt;&lt;span&gt;(ParamThreeValue)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;&#x2F; ..
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fbcbb;&quot;&gt;CmdBuilder&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;ParamOneTs, ParamTwoTs, ParamThreeTs&amp;gt; { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#616e88;&quot;&gt;&#x2F;* .. *&#x2F; &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This leads to.. ugly type parameter propagation for &lt;code&gt;CmdBuilder&lt;&#x2F;code&gt;, should it ever need to be named:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2e3440;color:#d8dee9;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#81a1c1;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#88c0d0;&quot;&gt;takes_cmd_builder&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;ParamOneTs, ParamTwoTs, ParamThreeTs&amp;gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    builder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eceff4;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ParamOneTs, ParamTwoTs, ParamThreeTs&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;) {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;small&gt;You may prefer type parameter names to all be uppercase acronyms, though I find it more comprehendable to have them named with words.&lt;&#x2F;small&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;ending-note&quot;&gt;Ending Note&lt;&#x2F;h2&gt;
+&lt;p&gt;I&#x27;d really like to uphold the principle of &amp;quot;if it compiles, it works&amp;quot;, because it is such a joy to use. Engineering that kind of empathy into code can be difficult, but with Rust, at least it is possible.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Automation Maturity Levels</title>
+		<published>2023-02-01T00:00:00+00:00</published>
+		<updated>2023-02-01T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://peace.mk/blog/automation-maturity-levels/" type="text/html"/>
+		<id>https://peace.mk/blog/automation-maturity-levels/</id>
+		<content type="html">&lt;p&gt;Software automation can be classified with the following levels of maturity:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Chaos:&lt;&#x2F;strong&gt; There is no process.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;None:&lt;&#x2F;strong&gt; The process is documented, but is executed manually by a human.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Blind:&lt;&#x2F;strong&gt; Does one thing, without question.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Speaks:&lt;&#x2F;strong&gt; Does one thing, writes messages when executing, and reports success or failure.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Listens:&lt;&#x2F;strong&gt; Takes in parameters, and does different things.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Multi-tasks:&lt;&#x2F;strong&gt; Executes work in parallel.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Thinks:&lt;&#x2F;strong&gt; If the work is already done, does not re-do it.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Translates:&lt;&#x2F;strong&gt; Writes output in human-friendly or computer-friendly formats.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Empathizes:&lt;&#x2F;strong&gt; Presents information in a way that is not overwhelming.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Communicates:&lt;&#x2F;strong&gt; Explains errors at a level that the user understands.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Guides:&lt;&#x2F;strong&gt; Suggests ways to fix errors.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Protects:&lt;&#x2F;strong&gt; Guards users from mistakenly using values that incur high costs.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Saves:&lt;&#x2F;strong&gt; Guards users from mistakenly executing actions with permanent consequences.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Forgives:&lt;&#x2F;strong&gt; Allows users to stop and revert a process when it wasn&#x27;t intended.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Small scale automation such as shell scripts tend to be at level 5, as the number of users is usually small, and their ability to understand technical errors is high.&lt;&#x2F;p&gt;
+&lt;p&gt;As the complexity of the automated process increases, higher levels of maturity are necessary to:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Enable users with less technically-focused roles to use the automation.&lt;&#x2F;li&gt;
+&lt;li&gt;Reduce the mental and emotional load on technical users who have to manage large systems.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Large scale automation may reach higher maturity levels for a subset of the overall process. This means large scale automation still requires substantial effort from users to understand the parts of the automation that are not at those higher levels.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>The Need For A New Framework</title>
+		<published>2023-01-25T00:00:00+00:00</published>
+		<updated>2023-01-25T00:00:00+00:00</updated>
+		<link rel="alternate" href="https://peace.mk/blog/the-need-for-a-new-framework/" type="text/html"/>
+		<id>https://peace.mk/blog/the-need-for-a-new-framework/</id>
+		<content type="html">&lt;blockquote&gt;
+&lt;p&gt;When there is no automation, you do the work.&lt;&#x2F;p&gt;
+&lt;p&gt;When there is automation, you work for the automation to do the work.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Whenever there is automation, the following work exists:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Development of the automation tool.&lt;&#x2F;li&gt;
+&lt;li&gt;Learning how to use the tool.&lt;&#x2F;li&gt;
+&lt;li&gt;Collecting parameters to pass to the tool.&lt;&#x2F;li&gt;
+&lt;li&gt;Checking the state of things, before running the automation.&lt;&#x2F;li&gt;
+&lt;li&gt;Recording execution progress and outcome for investigation.&lt;&#x2F;li&gt;
+&lt;li&gt;Fixing things when the automation encounters an error.&lt;&#x2F;li&gt;
+&lt;li&gt;Cleaning up when things are no longer needed -- reduce resource usage &#x2F; cost.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Common issues with defining and using automation are:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Not handling all cases.&lt;&#x2F;li&gt;
+&lt;li&gt;Not knowing how long a process takes.&lt;&#x2F;li&gt;
+&lt;li&gt;Not understanding what an error means.&lt;&#x2F;li&gt;
+&lt;li&gt;Not knowing how to resolve an error.&lt;&#x2F;li&gt;
+&lt;li&gt;Unnecessary &#x2F; repetitive waiting.&lt;&#x2F;li&gt;
+&lt;li&gt;Manually copying values between different automation processes.&lt;&#x2F;li&gt;
+&lt;li&gt;Starting an unstoppable process, then realizing something is wrong shortly after.&lt;&#x2F;li&gt;
+&lt;li&gt;Forgetting to clean up.&lt;&#x2F;li&gt;
+&lt;li&gt;Cleaning up, then realizing there is a mistake.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The impacts of these issues include:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;🧠 Mental stress.&lt;&#x2F;li&gt;
+&lt;li&gt;💙 Emotional stress.&lt;&#x2F;li&gt;
+&lt;li&gt;🥹 Loss of morale.&lt;&#x2F;li&gt;
+&lt;li&gt;✊ Inefficient use of effort.&lt;&#x2F;li&gt;
+&lt;li&gt;⏲️ Inefficient use of time.&lt;&#x2F;li&gt;
+&lt;li&gt;💸 Inefficient use of money.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;To reduce these negative impacts, an effective solution should encompass the following concerns &#x2F; considerations:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Low effort to prototype a hacked up solution.&lt;&#x2F;li&gt;
+&lt;li&gt;Progressive effort to turn the prototype into the actual automation tool.&lt;&#x2F;li&gt;
+&lt;li&gt;Compiler support for tracking execution paths.&lt;&#x2F;li&gt;
+&lt;li&gt;Automation based on psychology, not philosophy.&lt;&#x2F;li&gt;
+&lt;li&gt;Present information suitably for the current usage.&lt;&#x2F;li&gt;
+&lt;li&gt;Steps are executed with parallellism and concurrency.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;As much as possible, the solution should shoulder the burden of development from the automation developer -- if developers can focus on business logic, and automatically receive the user-friendly features, then the development experience will not be degraded, which allows them to maintain visible output and provide good user experience.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>
