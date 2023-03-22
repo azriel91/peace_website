@@ -74,7 +74,7 @@ jobs:
     - name: 'Build WASM examples'
       working-directory: peace
       run: |
-        for example in $(ls examples)
+        for example in download
         do wasm-pack build \
           --target web \
           --out-dir "../../../peace_website/static/book/examples/pkg" \
@@ -174,7 +174,7 @@ jobs:
     - name: 'Build WASM examples'
       working-directory: peace
       run: |
-        for example in $(ls examples)
+        for example in download
         do wasm-pack build \
           --target web \
           --out-dir "../../../peace_website/static/book/examples/pkg" \
