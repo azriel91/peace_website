@@ -77,7 +77,7 @@ jobs:
         for example in download
         do wasm-pack build \
           --target web \
-          --out-dir "../../../peace_website/static/book/examples/pkg" \
+          --out-dir "../../doc/src/examples/pkg" \
           --release \
           "examples/${example}" \
           --features 'error_reporting output_colorized output_json'
@@ -177,7 +177,7 @@ jobs:
         for example in download
         do wasm-pack build \
           --target web \
-          --out-dir "../../../peace_website/static/book/examples/pkg" \
+          --out-dir "../../doc/src/examples/pkg" \
           --release \
           "examples/${example}" \
           --features 'error_reporting output_colorized output_json'
