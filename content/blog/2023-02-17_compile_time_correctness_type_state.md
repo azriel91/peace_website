@@ -321,7 +321,7 @@ For example, if there are three fields that must all be set before `build()` can
 
     This leads to a quadratic number of `impl` blocks. *shudders*
 
-    Quite unwieldly.
+    Quite unwieldy.
 
 
 * A type parameter for each parameter:
