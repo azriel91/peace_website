@@ -27,12 +27,7 @@ jobs:
         path: 'peace'
 
     - name: 'Install Rust'
-      # FIXME: Switch back when actions-rs/toolchain#{209,220,222} is merged
-      uses: r3-os/actions-rust-toolchain@a862b6623c178b43a3135516442a5f72fb5c1877
-      with:
-        profile: minimal
-        toolchain: stable
-        override: true
+      uses: dtolnay/rust-toolchain@stable
 
     - name: 'Install `wasm-pack`'
       uses: jetli/wasm-pack-action@v0.4.0
@@ -51,12 +46,8 @@ jobs:
         key: ${{ runner.os }}-mdbook-graphviz
 
     - name: 'Install `mdbook-graphviz`'
-      # FIXME: Switch back when actions-rs/cargo#217 gets merged
-      uses: r3-os/actions-rust-cargo@fb222fe18dc90e381546d012f9e3d6f353f0f627
+      run: cargo install mdbook-graphviz
       if: steps.mdbook_graphviz_cache.outputs.cache-hit != 'true'
-      with:
-        command: install
-        args: mdbook-graphviz --version 0.1.4
 
     # install mdbook
     - name: Install `mdbook`
@@ -99,8 +90,7 @@ jobs:
       run: rm -f ./static/book/examples/pkg/.gitignore
 
     - name: 'Build zola site'
-      # FIXME: Switch back when shalzz/zola-deploy-action#{48,60} are merged
-      uses: azriel91/zola-deploy-action@c173cc16a229df050138ef27d37136329683f304
+      uses: shalzz/zola-deploy-action
       env:
         WORKING_DIR: peace_website
         PAGES_BRANCH: gh-pages
@@ -127,12 +117,7 @@ jobs:
         path: 'peace'
 
     - name: 'Install Rust'
-      # FIXME: Switch back when actions-rs/toolchain#{209,220,222} is merged
-      uses: r3-os/actions-rust-toolchain@a862b6623c178b43a3135516442a5f72fb5c1877
-      with:
-        profile: minimal
-        toolchain: stable
-        override: true
+      uses: dtolnay/rust-toolchain@stable
 
     - name: 'Install `wasm-pack`'
       uses: jetli/wasm-pack-action@v0.4.0
@@ -151,12 +136,8 @@ jobs:
         key: ${{ runner.os }}-mdbook-graphviz
 
     - name: 'Install `mdbook-graphviz`'
-      # FIXME: Switch back when actions-rs/cargo#217 gets merged
-      uses: r3-os/actions-rust-cargo@fb222fe18dc90e381546d012f9e3d6f353f0f627
+      run: cargo install mdbook-graphviz
       if: steps.mdbook_graphviz_cache.outputs.cache-hit != 'true'
-      with:
-        command: install
-        args: mdbook-graphviz --version 0.1.4
 
     # install mdbook
     - name: Install `mdbook`
@@ -199,8 +180,7 @@ jobs:
       run: rm -f ./static/book/examples/pkg/.gitignore
 
     - name: 'Build zola site and deploy'
-      # FIXME: Switch back when shalzz/zola-deploy-action#{48,60} are merged
-      uses: azriel91/zola-deploy-action@c173cc16a229df050138ef27d37136329683f304
+      uses: shalzz/zola-deploy-action
       env:
         WORKING_DIR: peace_website
         PAGES_BRANCH: gh-pages
