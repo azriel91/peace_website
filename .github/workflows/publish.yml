@@ -95,7 +95,7 @@ jobs:
     - name: 'Build zola site'
       uses: shalzz/zola-deploy-action@v0.17.2
       env:
-        WORKING_DIR: peace_website
+        BUILD_DIR: peace_website
         PAGES_BRANCH: gh-pages
         # Unnecessary for build only
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -188,7 +188,7 @@ jobs:
     - name: 'Build zola site and deploy'
       uses: shalzz/zola-deploy-action@v0.17.2
       env:
-        WORKING_DIR: peace_website
+        BUILD_DIR: peace_website
         PAGES_BRANCH: gh-pages
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         CHECK_LINKS: true
