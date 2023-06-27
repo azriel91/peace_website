@@ -55,10 +55,10 @@ Peace presents the highest value information at a glance, with easy options to g
 {% card(id="adaptive_presentation") %}
 
 <pre class="terminal">
-<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>  <span style='color:#7f7f7f'># interactive</span>
-✅ <span style='color:#5faaff'>app   </span>▕<span style='background:#00af5f'>             </span>▏built in 4s
-🔨 <span style='color:#5faaff'>server</span>▕<span style='background:#0087d7'>    </span><span style='background:#00005f'>         </span>▏el: 7s, eta: 9s
-⏳ <span style='color:#5faaff'>upload</span>▕<span style='background:#000033'>             </span>▏deps: [server]
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>ensure</span>  <span style='color:#7f7f7f'># interactive</span>
+✅ <span style='color:#5faaff'>app   </span> <span style='color:#00af5f'>▰▰▰▰▰▰▰▰▰▰▰▰▰</span> built in 4s
+🔨 <span style='color:#5faaff'>server</span> <span style='color:#0087d7'>▰▰▰▰▱▱▱▱▱▱▱▱▱</span> el: 7s, eta: 9s
+⏳ <span style='color:#5faaff'>upload</span> <span style='color:#555'>▱▱▱▱▱▱▱▱▱▱▱▱▱</span> deps: [server]
 
 * To stop, press <span style='color:#bbbbbb'>Ctrl + C</span>
 * For detail, in another terminal run:
@@ -97,10 +97,10 @@ Peace presents information and actions adaptively:
 {% card(id="empirical_usability") %}
 
 <pre class="terminal">
-<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>
-✅ <span style='color:#5faaff'>app   </span>▕<span style='background:#00af5f'>             </span>▏built in 4s
-⚠️ <span style='color:#5faaff'>server</span>▕<span style='background:#eecc00'>       </span><span style='background:#664400'>      </span>▏el: 33s, eta: 7s
-⏳ <span style='color:#5faaff'>upload</span>▕<span style='background:#000033'>             </span>▏deps: [server]
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>ensure</span>
+✅ <span style='color:#5faaff'>app   </span> <span style='color:#00af5f'>▰▰▰▰▰▰▰▰▰▰▰▰▰</span> built in 4s
+⚠️ <span style='color:#5faaff'>server</span> <span style='color:#eecc00'>▰▰▰▰▰▰▰</span><span style='color:#664400'>▱▱▱▱▱▱</span> el: 33s, eta: 7s
+⏳ <span style='color:#5faaff'>upload</span> <span style='color:#555'>▱▱▱▱▱▱▱▱▱▱▱▱▱</span> deps: [server]
 
 * To stop, press <span style='color:#bbbbbb'>Ctrl + C</span>
 * For detail, in another terminal run:
@@ -132,10 +132,10 @@ Peace automatically tracks execution metrics. This enables:
 {% card(id="understandable_errors") %}
 
 <pre class="terminal">
-<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>apply</span>
-✅ <span style='color:#5faaff'>app   </span>▕<span style='background:#00af5f'>             </span>▏built in 4s
-❌ <span style='color:#5faaff'>server</span>▕<span style='background:#cc0000'>       </span><span style='background:#331111'>      </span>▏el: 33s, eta: 7s
-🚫 <span style='color:#5faaff'>upload</span>▕<span style='background:#331111'>             </span>▏deps: [server]
+<span class='shell'>&gt; </span><span class='cmd'>envman</span> <span class='arg'>ensure</span>
+✅ <span style='color:#5faaff'>app   </span> <span style='color:#00af5f'>▰▰▰▰▰▰▰▰▰▰▰▰▰</span> built in 4s
+❌ <span style='color:#5faaff'>server</span> <span style='color:#cc0000'>▰▰▰▰▰▰▰</span><span style='color:#331111'>▱▱▱▱▱▱</span> el: 33s, eta: 7s
+🚫 <span style='color:#5faaff'>upload</span> <span style='color:#555'>▱▱▱▱▱▱▱▱▱▱▱▱▱</span> deps: [server]
 
 Error: <span style='color:#e00'>server_package_install</span>
 
@@ -176,14 +176,14 @@ People don't feel lost when what they do doesn't work; they feel lost when they 
 profile: <span style='color:#5fff87'>development</span>
 <span style='color:#eeeeee'>2023-01-25+1300</span> <span style='color:#bbbbbb'>(2 days ago)</span>
 * ✅ <span style='color:#5faaff'>8</span> <span style='color:#bbbbbb'>15:28:20</span> envman clean
-* ✅ <span style='color:#5faaff'>7</span> <span style='color:#bbbbbb'>14:56:32</span> envman apply
-* ✅ <span style='color:#5faaff'>6</span> <span style='color:#bbbbbb'>14:48:22</span> envman apply
-* ❌ <span style='color:#5faaff'>5</span> <span style='color:#bbbbbb'>14:47:19</span> envman apply
-* ✅ <span style='color:#5faaff'>4</span> <span style='color:#bbbbbb'>14:31:48</span> envman apply
+* ✅ <span style='color:#5faaff'>7</span> <span style='color:#bbbbbb'>14:56:32</span> envman ensure
+* ✅ <span style='color:#5faaff'>6</span> <span style='color:#bbbbbb'>14:48:22</span> envman ensure
+* ❌ <span style='color:#5faaff'>5</span> <span style='color:#bbbbbb'>14:47:19</span> envman ensure
+* ✅ <span style='color:#5faaff'>4</span> <span style='color:#bbbbbb'>14:31:48</span> envman ensure
 <span style='color:#eeeeee'>2023-01-24+1300</span> <span style='color:#bbbbbb'>(3 days ago)</span>
 * ✅ <span style='color:#5faaff'>3</span> <span style='color:#bbbbbb'>17:05:17</span> envman clean
-* ✅ <span style='color:#5faaff'>2</span> <span style='color:#bbbbbb'>16:32:08</span> envman apply
-* ✅ <span style='color:#5faaff'>1</span> <span style='color:#bbbbbb'>16:29:59</span> envman apply
+* ✅ <span style='color:#5faaff'>2</span> <span style='color:#bbbbbb'>16:32:08</span> envman ensure
+* ✅ <span style='color:#5faaff'>1</span> <span style='color:#bbbbbb'>16:29:59</span> envman ensure
 </pre>
 
 {% end %}
@@ -264,7 +264,7 @@ features = [
     "output_json",
     "output_progress",
     "state_current",  # 🚧
-    "state_desired",  # 🚧
+    "state_goal",     # 🚧
     "state_diff",     # 🚧
     # ..
 ]
@@ -277,7 +277,7 @@ features = [
 ```diff
  async fn apply_exec(
      state_current: Self::State,
-     state_desired: Self::State,
+     state_goal: Self::State,
 +    state_diff: Self::StateDiff,
  ) -> Result<(), E>
 ```
@@ -302,9 +302,9 @@ A collection of functions to manage an *item*, e.g. application compilation, fil
 Base functions:
 
 * **Current:** Retrieve the current state.
-* **Desired:** Retrieve the desired state.
-* **Diff:** Diff the current and desired states.
-* **Apply:** Change the state from current to desired.
+* **Goal:** Retrieve the goal state.
+* **Diff:** Diff the current and goal states.
+* **Ensure:** Change the state from current to goal.
 * **Clean:** Clean up the item.
 * more to come
 
@@ -345,7 +345,7 @@ Examples:
 Advanced flows may invert execution direction:
 
 * `clean` cleans up items in reverse order.
-* `apply` on a *subset* of items may forward alter some items, and clean others.
+* `ensure` on a *subset* of items may forward alter some items, and clean others.
 
 {% end %}
 
@@ -438,19 +438,19 @@ Rust's commitment to helping people learn, with clear explanations and examples,
             </tr>
             <hr/>
             <tr>
-                <td align="left" balign="left" bgcolor="#aaddaa">Desired State</td>
+                <td align="left" balign="left" bgcolor="#aaddaa">Goal State</td>
                 <vr />
                 <td align="left" balign="left">⚫ Not exists<br/>⚫ Out-of-date<br/>🔵 Up-to-date</td>
             </tr>
             <hr/>
             <tr>
-                <td align="left" balign="left" bgcolor="#88cc88">Apply Diff</td>
+                <td align="left" balign="left" bgcolor="#88cc88">Ensure Diff</td>
                 <vr />
                 <td align="left" balign="left">Application will be recompiled<br/>to 'target/debug/app'</td>
             </tr>
             <hr/>
             <tr>
-                <td align="left" balign="left" bgcolor="#88cc88">Apply Exec</td>
+                <td align="left" balign="left" bgcolor="#88cc88">Ensure Exec</td>
                 <vr />
                 <td align="left" balign="left">Run <font face="monospace" point-size="12">cargo build</font></td>
             </tr>
@@ -553,22 +553,22 @@ Rust's commitment to helping people learn, with clear explanations and examples,
             fontcolor = "#7f7f7f"
         ]
 
-        subgraph cluster_apply_exec {
-            label = "apply"
+        subgraph cluster_ensure_exec {
+            label = "ensure"
 
             node [color="#449966" fillcolor="#88cc88"]
 
-            apply_exec_a [label = ""]
-            apply_exec_b [label = ""]
-            apply_exec_c [label = ""]
-            apply_exec_d [label = "" fillcolor="#ddddaa" style="dashed,filled"]
-            apply_exec_e [label = "" fillcolor="#ddddaa" style="dashed,filled"]
+            ensure_exec_a [label = ""]
+            ensure_exec_b [label = ""]
+            ensure_exec_c [label = ""]
+            ensure_exec_d [label = "" fillcolor="#ddddaa" style="dashed,filled"]
+            ensure_exec_e [label = "" fillcolor="#ddddaa" style="dashed,filled"]
 
-            apply_exec_a -> apply_exec_b
-            apply_exec_a -> apply_exec_c
-            apply_exec_b -> apply_exec_d
-            apply_exec_b -> apply_exec_e
-            apply_exec_c -> apply_exec_e
+            ensure_exec_a -> ensure_exec_b
+            ensure_exec_a -> ensure_exec_c
+            ensure_exec_b -> ensure_exec_d
+            ensure_exec_b -> ensure_exec_e
+            ensure_exec_c -> ensure_exec_e
         }
 
         subgraph cluster_clean_exec {
@@ -608,22 +608,22 @@ Rust's commitment to helping people learn, with clear explanations and examples,
             state_current_c -> state_current_e
         }
 
-        subgraph cluster_state_desired {
-            label = "desired state"
+        subgraph cluster_state_goal {
+            label = "goal state"
 
             node [color="#449966" fillcolor="#ddddaa"]
 
-            state_desired_a [label = ""]
-            state_desired_b [label = ""]
-            state_desired_c [label = ""]
-            state_desired_d [label = ""]
-            state_desired_e [label = ""]
+            state_goal_a [label = ""]
+            state_goal_b [label = ""]
+            state_goal_c [label = ""]
+            state_goal_d [label = ""]
+            state_goal_e [label = ""]
 
-            state_desired_a -> state_desired_b [weight = 4]
-            state_desired_a -> state_desired_c [weight = 3]
-            state_desired_b -> state_desired_d
-            state_desired_b -> state_desired_e
-            state_desired_c -> state_desired_e
+            state_goal_a -> state_goal_b [weight = 4]
+            state_goal_a -> state_goal_c [weight = 3]
+            state_goal_b -> state_goal_d
+            state_goal_b -> state_goal_e
+            state_goal_c -> state_goal_e
         }
 
         subgraph cluster_state_clean {
@@ -645,10 +645,10 @@ Rust's commitment to helping people learn, with clear explanations and examples,
             state_clean_c -> state_clean_e
         }
 
-        state_current_a -> state_desired_a [style = "invis"]
+        state_current_a -> state_goal_a [style = "invis"]
         state_current_a -> state_clean_a [style = "invis"]
-        state_desired_d -> apply_exec_a [style = "invis"]
-        state_desired_e -> apply_exec_a [style = "invis"]
+        state_goal_d -> ensure_exec_a [style = "invis"]
+        state_goal_e -> ensure_exec_a [style = "invis"]
         state_clean_d -> clean_exec_a [style = "invis"]
         state_clean_e -> clean_exec_a [style = "invis"]
     }`;
