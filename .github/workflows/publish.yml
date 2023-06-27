@@ -27,7 +27,7 @@ jobs:
         path: 'peace'
 
     - name: 'Install Rust'
-      - uses: dtolnay/rust-toolchain@master
+      uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
           targets: wasm32-unknown-unknown
@@ -120,7 +120,7 @@ jobs:
         path: 'peace'
 
     - name: 'Install Rust'
-      - uses: dtolnay/rust-toolchain@master
+      uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
           targets: wasm32-unknown-unknown
