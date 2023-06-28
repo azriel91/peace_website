@@ -42,8 +42,8 @@ How does the Peace framework shape automation to be resilient and provide a good
     The following show 3 functions for each step:
 
     1. Current state.
-    2. Desired state.
-    3. Logic to change the current state into the desired state.
+    2. Goal state.
+    3. Logic to change the current state into the goal state.
 
     ```rust
     // Application
@@ -62,7 +62,7 @@ How does the Peace framework shape automation to be resilient and provide a good
     fn file_upload(..) -> _      { sh!("scp {src} user@{ip}:{dest}"); .. }
     ```
 
-4. With the current and desired states, we can calculate a diff, and whether we need to do work:
+4. With the current and goal states, we can calculate a diff, and whether we need to do work:
 
     ```rust
     // Application
@@ -94,7 +94,7 @@ How does the Peace framework shape automation to be resilient and provide a good
         type StateDiff;
 
         fn state_current() -> Self::State;
-        fn state_desired() -> Self::State;
+        fn state_goal() -> Self::State;
         fn state_diff(Self::State, Self::State) -> Self::StateDiff;
         fn check(Self::StateDiff) -> bool;
         fn apply(Self::State, Self::State, Self::StateDiff);
@@ -113,7 +113,7 @@ How does the Peace framework shape automation to be resilient and provide a good
     - `StatesDiscoverCmd`: Runs `state_current` for all items.
     - `ApplyCmd`: Given a target state, runs the following for all items:
         1. `state_current`
-        2. `state_desired`
+        2. `state_goal`
         3. `diff`
         4. `check`
         5. `apply`
@@ -257,22 +257,22 @@ Peace is still evolving, and is not ready for general adoption.
             fontcolor = "#7f7f7f"
         ]
 
-        subgraph cluster_apply_exec {
+        subgraph cluster_ensure_exec {
             label = "apply"
 
             node [color="#449966" fillcolor="#88cc88"]
 
-            apply_exec_a [label = ""]
-            apply_exec_b [label = ""]
-            apply_exec_c [label = ""]
-            apply_exec_d [label = "" fillcolor="#ddddaa" style="dashed,filled"]
-            apply_exec_e [label = "" fillcolor="#ddddaa" style="dashed,filled"]
+            ensure_exec_a [label = ""]
+            ensure_exec_b [label = ""]
+            ensure_exec_c [label = ""]
+            ensure_exec_d [label = "" fillcolor="#ddddaa" style="dashed,filled"]
+            ensure_exec_e [label = "" fillcolor="#ddddaa" style="dashed,filled"]
 
-            apply_exec_a -> apply_exec_b
-            apply_exec_a -> apply_exec_c
-            apply_exec_b -> apply_exec_d
-            apply_exec_b -> apply_exec_e
-            apply_exec_c -> apply_exec_e
+            ensure_exec_a -> ensure_exec_b
+            ensure_exec_a -> ensure_exec_c
+            ensure_exec_b -> ensure_exec_d
+            ensure_exec_b -> ensure_exec_e
+            ensure_exec_c -> ensure_exec_e
         }
 
         subgraph cluster_clean_exec {
@@ -312,22 +312,22 @@ Peace is still evolving, and is not ready for general adoption.
             state_current_c -> state_current_e
         }
 
-        subgraph cluster_state_desired {
-            label = "desired state"
+        subgraph cluster_state_goal {
+            label = "goal state"
 
             node [color="#449966" fillcolor="#ddddaa"]
 
-            state_desired_a [label = ""]
-            state_desired_b [label = ""]
-            state_desired_c [label = ""]
-            state_desired_d [label = ""]
-            state_desired_e [label = ""]
+            state_goal_a [label = ""]
+            state_goal_b [label = ""]
+            state_goal_c [label = ""]
+            state_goal_d [label = ""]
+            state_goal_e [label = ""]
 
-            state_desired_a -> state_desired_b [weight = 4]
-            state_desired_a -> state_desired_c [weight = 3]
-            state_desired_b -> state_desired_d
-            state_desired_b -> state_desired_e
-            state_desired_c -> state_desired_e
+            state_goal_a -> state_goal_b [weight = 4]
+            state_goal_a -> state_goal_c [weight = 3]
+            state_goal_b -> state_goal_d
+            state_goal_b -> state_goal_e
+            state_goal_c -> state_goal_e
         }
 
         subgraph cluster_state_clean {
@@ -349,10 +349,10 @@ Peace is still evolving, and is not ready for general adoption.
             state_clean_c -> state_clean_e
         }
 
-        state_current_a -> state_desired_a [style = "invis"]
+        state_current_a -> state_goal_a [style = "invis"]
         state_current_a -> state_clean_a [style = "invis"]
-        state_desired_d -> apply_exec_a [style = "invis"]
-        state_desired_e -> apply_exec_a [style = "invis"]
+        state_goal_d -> ensure_exec_a [style = "invis"]
+        state_goal_e -> ensure_exec_a [style = "invis"]
         state_clean_d -> clean_exec_a [style = "invis"]
         state_clean_e -> clean_exec_a [style = "invis"]
     }`;
