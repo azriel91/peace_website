@@ -29,8 +29,7 @@ The following steps build the book and have it served by `zola`.
     ```bash
     sudo apt install graphviz
     cargo install mdbook
-    # https://github.com/dylanowen/mdbook-graphviz/issues/43
-    cargo install mdbook-graphviz --version 0.1.4
+    cargo install mdbook-graphviz
     ```
 
 2. Clone the `peace` repository beside the `peace_website` repository:
