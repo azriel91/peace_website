@@ -53,7 +53,7 @@ Type safety, compile time support, and code assist enables:
 * Errors at compile time &ndash; no longer waste time deploying to discover *minor* issues.
 * Writing code to pass values between items, not string templates.
 
-Real code from [`env_deploy_flow.rs@0.0.11`](https://github.com/azriel91/peace/blob/0.0.11/examples/envman/src/flows/env_deploy_flow.rs#L134-L148):
+Real code from <a href="https://github.com/azriel91/peace/blob/0.0.11/examples/envman/src/flows/env_deploy_flow.rs#L134-L148">`env_deploy_flow.rs@0.0.11`</a>:
 
 ```rust
 let iam_role_params_spec = IamRoleParams::<WebApp>::field_wise_spec()
@@ -72,6 +72,7 @@ let iam_role_params_spec = IamRoleParams::<WebApp>::field_wise_spec()
     })
     .build();
 ```
+
 
 
 ### No Minor Annoyances
