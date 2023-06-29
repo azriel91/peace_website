@@ -125,7 +125,7 @@ For the Peace framework to be a sensible choice to build a production tool, the 
 * Terminate these servers, recreate the VPC with resized CIDR blocks, then launch new servers in the new VPC.
 * This infrastructure was created manually, now it should be automatically managed, and migrated to use new naming conventions.
 
-The [Peace: Production Readiness] GitHub project captures this work.
+The [Peace: Production Readiness] GitHub project captures this work. See [Flow Versioning](https://peace.mk/book/technical_concepts/flow_versioning.html) for my technical thinking out loud notes.
 
 
 ## User Interface
@@ -141,7 +141,7 @@ Peace should provide support for:
 
 Some of the CLI presentation logic currently lives in the `envman` example, and should be moved into `peace`, and the web presentation logic is currently "bundle [`leptos`](https://github.com/leptos-rs/leptos) with the command line app and render the flow graph".
 
-The [Peace: UI] GitHub project captures the start of this work.
+The [Peace: UI] GitHub project captures the start of this work. For the web UI part, see <a href="https://github.com/azriel91/peace/blob/0.0.11/DEVELOPMENT.md#web-development">`DEVELOPMENT.md#web-development`</a>.
 
 
 ## API Refinement
