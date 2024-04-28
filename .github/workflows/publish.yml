@@ -41,6 +41,24 @@ jobs:
     - name: 'Install Graphviz'
       uses: ts-graphviz/setup-graphviz@v1
 
+    # install mdbook
+    - name: mdbook Cache
+      id: mdbook_cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cargo/bin/mdbook
+        key: ${{ runner.os }}-mdbook
+
+    # - name: Install `mdbook`
+    #   uses: peaceiris/actions-mdbook@v1
+    #   with:
+    #     mdbook-version: latest
+
+    # use custom version of mdbook for now
+    - name: Install `mdbook`
+      run: cargo install mdbook --git https://github.com/azriel91/mdBook.git --branch improvement/code-blocks
+      if: steps.mdbook_cache.outputs.cache-hit != 'true'
+
     # install mdbook-graphviz
     - name: mdbook-graphviz Cache
       id: mdbook_graphviz_cache
@@ -52,12 +70,6 @@ jobs:
     - name: 'Install `mdbook-graphviz`'
       run: cargo install mdbook-graphviz
       if: steps.mdbook_graphviz_cache.outputs.cache-hit != 'true'
-
-    # install mdbook
-    - name: Install `mdbook`
-      uses: peaceiris/actions-mdbook@v1
-      with:
-        mdbook-version: latest
 
     # build WASM examples
     #
@@ -134,6 +146,24 @@ jobs:
     - name: 'Install Graphviz'
       uses: ts-graphviz/setup-graphviz@v1
 
+    # install mdbook
+    - name: mdbook Cache
+      id: mdbook_cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cargo/bin/mdbook
+        key: ${{ runner.os }}-mdbook
+
+    # - name: Install `mdbook`
+    #   uses: peaceiris/actions-mdbook@v1
+    #   with:
+    #     mdbook-version: latest
+
+    # use custom version of mdbook for now
+    - name: Install `mdbook`
+      run: cargo install mdbook --git https://github.com/azriel91/mdBook.git --branch improvement/code-blocks
+      if: steps.mdbook_cache.outputs.cache-hit != 'true'
+
     # install mdbook-graphviz
     - name: mdbook-graphviz Cache
       id: mdbook_graphviz_cache
@@ -145,12 +175,6 @@ jobs:
     - name: 'Install `mdbook-graphviz`'
       run: cargo install mdbook-graphviz
       if: steps.mdbook_graphviz_cache.outputs.cache-hit != 'true'
-
-    # install mdbook
-    - name: Install `mdbook`
-      uses: peaceiris/actions-mdbook@v1
-      with:
-        mdbook-version: latest
 
     # build WASM examples
     #
