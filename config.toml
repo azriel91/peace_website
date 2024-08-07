@@ -32,4 +32,5 @@ hush_extra_menu = [
 ]
 repository_url = "https://github.com/azriel91/peace"
 hush_exclude_menu = []
-google_analytics_code = "GTM-PF3D48Q9"
+google_analytics_code = "G-QVELB8JW90"
+google_tag_manager_code = "GTM-PF3D48Q9"
