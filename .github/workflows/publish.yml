@@ -17,12 +17,12 @@ jobs:
     timeout-minutes: 10
     steps:
     - name: 'Checkout peace_website repository'
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: 'peace_website'
 
     - name: 'Checkout peace repository'
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: 'azriel91/peace'
         path: 'peace'
@@ -44,7 +44,7 @@ jobs:
     # install mdbook
     - name: mdbook Cache
       id: mdbook_cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cargo/bin/mdbook
         key: ${{ runner.os }}-mdbook
@@ -62,7 +62,7 @@ jobs:
     # install mdbook-graphviz
     - name: mdbook-graphviz Cache
       id: mdbook_graphviz_cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cargo/bin/mdbook-graphviz
         key: ${{ runner.os }}-mdbook-graphviz
@@ -122,12 +122,12 @@ jobs:
     timeout-minutes: 10
     steps:
     - name: 'Checkout peace_website repository'
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: 'peace_website'
 
     - name: 'Checkout peace repository'
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: 'azriel91/peace'
         path: 'peace'
@@ -149,7 +149,7 @@ jobs:
     # install mdbook
     - name: mdbook Cache
       id: mdbook_cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cargo/bin/mdbook
         key: ${{ runner.os }}-mdbook
@@ -167,7 +167,7 @@ jobs:
     # install mdbook-graphviz
     - name: mdbook-graphviz Cache
       id: mdbook_graphviz_cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cargo/bin/mdbook-graphviz
         key: ${{ runner.os }}-mdbook-graphviz
