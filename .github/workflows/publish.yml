@@ -106,7 +106,7 @@ jobs:
       run: rm -f ./static/book/examples/pkg/.gitignore
 
     - name: 'Build zola site'
-      uses: shalzz/zola-deploy-action@448f43557d06624a326567089b8965c79ba58306
+      uses: shalzz/zola-deploy-action@v0.19.2
       env:
         BUILD_DIR: peace_website
         PAGES_BRANCH: gh-pages
@@ -211,7 +211,7 @@ jobs:
       run: rm -f ./static/book/examples/pkg/.gitignore
 
     - name: 'Build zola site and deploy'
-      uses: shalzz/zola-deploy-action@448f43557d06624a326567089b8965c79ba58306
+      uses: shalzz/zola-deploy-action@v0.19.2
       env:
         BUILD_DIR: peace_website
         PAGES_BRANCH: gh-pages
