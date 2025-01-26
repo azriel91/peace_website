@@ -5,7 +5,7 @@ template = "blog.html"
 page_template = "blog_post.html"
 weight = 3
 sort_by = "date"
-generate_feed = true
+generate_feeds = true
 insert_anchor_links = "heading"
 
 [extra]
