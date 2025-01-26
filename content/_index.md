@@ -9,9 +9,11 @@ sort_by = "weight"
 >
 > Peace is a work in progress, and this website serves to communicate the project vision.
 >
-> Approximately 20% of the features listed on this page are implemented; a substantial amount of the completed work has been foundational and exploration.
+> Approximately 30% of the features listed on this page are implemented; a substantial amount of the completed work has been foundational and exploration.
 
 **Peace** is a framework to build robust, *understandable* software automation, incrementally.
+
+See [Checkpoint#demo](/blog/checkpoint/#2-demo) for screen recordings of what's possible today.
 
 
 # The Peace Advantage
