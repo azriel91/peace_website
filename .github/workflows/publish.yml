@@ -17,12 +17,12 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout peace_website repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: "peace_website"
 
       - name: "Checkout peace repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: "azriel91/peace"
           path: "peace"
@@ -42,34 +42,44 @@ jobs:
         uses: ts-graphviz/setup-graphviz@v1
 
       # install mdbook
-      - name: mdbook Cache
-        id: mdbook_cache
-        uses: actions/cache@v4
+      - name: mdbook cache restore
+        id: mdbook_cache_restore
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cargo/bin/mdbook
           key: ${{ runner.os }}-mdbook
 
-      # - name: Install `mdbook`
-      #   uses: peaceiris/actions-mdbook@v1
-      #   with:
-      #     mdbook-version: latest
-
       # use custom version of mdbook for now
       - name: Install `mdbook`
         run: cargo install mdbook --git https://github.com/azriel91/mdBook.git --branch improvement/code-blocks
-        if: steps.mdbook_cache.outputs.cache-hit != 'true'
+        if: steps.mdbook_cache_restore.outputs.cache-hit != 'true'
+
+      - name: mdbook cache save
+        id: mdbook_cache_save
+        uses: actions/cache/save@v4
+        if: always() && steps.mdbook_cache_restore.outputs.cache-hit != 'true'
+        with:
+          path: ~/.cargo/bin/mdbook
+          key: ${{ runner.os }}-mdbook
 
       # install mdbook-graphviz
-      - name: mdbook-graphviz Cache
-        id: mdbook_graphviz_cache
-        uses: actions/cache@v4
+      - name: mdbook-graphviz cache restore
+        id: mdbook_graphviz_cache_restore
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cargo/bin/mdbook-graphviz
           key: ${{ runner.os }}-mdbook-graphviz
 
-      - name: "Install `mdbook-graphviz`"
-        run: cargo install mdbook-graphviz
-        if: steps.mdbook_graphviz_cache.outputs.cache-hit != 'true'
+      - run: cargo install --locked mdbook-graphviz
+        if: steps.mdbook_graphviz_cache_restore.outputs.cache-hit != 'true'
+
+      - name: mdbook-graphviz cache save
+        id: mdbook_graphviz_cache_save
+        uses: actions/cache/save@v4
+        if: always() && steps.mdbook_graphviz_cache_restore.outputs.cache-hit != 'true'
+        with:
+          path: ~/.cargo/bin/mdbook-graphviz
+          key: ${{ runner.os }}-mdbook-graphviz
 
       # build WASM examples
       #
@@ -106,7 +116,7 @@ jobs:
         run: rm -f ./static/book/examples/pkg/.gitignore
 
       - name: "Build zola site"
-        uses: shalzz/zola-deploy-action@v0.19.2
+        uses: shalzz/zola-deploy-action@v0.21.0
         env:
           BUILD_DIR: peace_website
           PAGES_BRANCH: gh-pages
@@ -125,12 +135,12 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout peace_website repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: "peace_website"
 
       - name: "Checkout peace repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: "azriel91/peace"
           path: "peace"
@@ -150,34 +160,44 @@ jobs:
         uses: ts-graphviz/setup-graphviz@v1
 
       # install mdbook
-      - name: mdbook Cache
-        id: mdbook_cache
-        uses: actions/cache@v4
+      - name: mdbook cache restore
+        id: mdbook_cache_restore
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cargo/bin/mdbook
           key: ${{ runner.os }}-mdbook
 
-      # - name: Install `mdbook`
-      #   uses: peaceiris/actions-mdbook@v1
-      #   with:
-      #     mdbook-version: latest
-
       # use custom version of mdbook for now
       - name: Install `mdbook`
         run: cargo install mdbook --git https://github.com/azriel91/mdBook.git --branch improvement/code-blocks
-        if: steps.mdbook_cache.outputs.cache-hit != 'true'
+        if: steps.mdbook_cache_restore.outputs.cache-hit != 'true'
+
+      - name: mdbook cache save
+        id: mdbook_cache_save
+        uses: actions/cache/save@v4
+        if: always() && steps.mdbook_cache_restore.outputs.cache-hit != 'true'
+        with:
+          path: ~/.cargo/bin/mdbook
+          key: ${{ runner.os }}-mdbook
 
       # install mdbook-graphviz
-      - name: mdbook-graphviz Cache
-        id: mdbook_graphviz_cache
-        uses: actions/cache@v4
+      - name: mdbook-graphviz cache restore
+        id: mdbook_graphviz_cache_restore
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cargo/bin/mdbook-graphviz
           key: ${{ runner.os }}-mdbook-graphviz
 
-      - name: "Install `mdbook-graphviz`"
-        run: cargo install mdbook-graphviz
-        if: steps.mdbook_graphviz_cache.outputs.cache-hit != 'true'
+      - run: cargo install --locked mdbook-graphviz
+        if: steps.mdbook_graphviz_cache_restore.outputs.cache-hit != 'true'
+
+      - name: mdbook-graphviz cache save
+        id: mdbook_graphviz_cache_save
+        uses: actions/cache/save@v4
+        if: always() && steps.mdbook_graphviz_cache_restore.outputs.cache-hit != 'true'
+        with:
+          path: ~/.cargo/bin/mdbook-graphviz
+          key: ${{ runner.os }}-mdbook-graphviz
 
       # build WASM examples
       #
@@ -214,7 +234,7 @@ jobs:
         run: rm -f ./static/book/examples/pkg/.gitignore
 
       - name: "Build zola site and deploy"
-        uses: shalzz/zola-deploy-action@v0.19.2
+        uses: shalzz/zola-deploy-action@v0.21.0
         env:
           BUILD_DIR: peace_website
           PAGES_BRANCH: gh-pages
