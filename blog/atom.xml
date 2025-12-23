@@ -1,0 +1,1302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Peace - Zero Stress Automation - 🪶 Blog</title>
+    <link rel="self" type="application/atom+xml" href="https://peace.mk/blog/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://peace.mk/blog/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-01-26T00:00:00+00:00</updated>
+    <id>https://peace.mk/blog/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Checkpoint</title>
+        <published>2025-01-26T00:00:00+00:00</published>
+        <updated>2025-01-26T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://peace.mk/blog/checkpoint/"/>
+        <id>https://peace.mk/blog/checkpoint/</id>
+        
+        <content type="html" xml:base="https://peace.mk/blog/checkpoint/">&lt;p&gt;Does this project have to be an endless single player game?&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tl-dr&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#tl-dr&quot; aria-label=&quot;Anchor link for: tl-dr&quot;&gt;TL;DR&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I&#x27;m hoping for any combination of the following:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;People who want to see the Peace framework developed to viable-existence, to &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sponsors&#x2F;azriel91&quot;&gt;fund my existence&lt;&#x2F;a&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Someone to take over and continue development of the Peace project.&lt;&#x2F;li&gt;
+&lt;li&gt;Someone who finds the &lt;a href=&quot;https:&#x2F;&#x2F;azriel.im&#x2F;dot_ix&#x2F;&quot;&gt;✒️ &lt;code&gt;dot_ix&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; side-side project fun or fulfilling, to take over it &#x2F; develop &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;layout-rs&quot;&gt;&lt;code&gt;layout-rs&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; as a replacement for GraphViz dot, and switch to &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;encre-css&quot;&gt;&lt;code&gt;encre-css&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; for styling.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;1-motivation&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#1-motivation&quot; aria-label=&quot;Anchor link for: 1-motivation&quot;&gt;1. Motivation&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Each time I provide or use a tool that manages software infrastructure, there is always something lacking. Pragmatically, an organisation whose business is to ship a product, cannot invest disproportional resource on improving tools beyond &quot;it&#x27;s efficient enough&quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;However, one of my desires is to have ridiculously good tools&lt;sup&gt;1&lt;&#x2F;sup&gt;, because they can:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;switch dangerous buttons for safe ones&lt;&#x2F;li&gt;
+&lt;li&gt;simplify overwhelming information into someting understandable&lt;&#x2F;li&gt;
+&lt;li&gt;turn fear of mistakes into fun of learning&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;sup&gt;1&lt;&#x2F;sup&gt; &lt;small&gt;ridiculous enough for a dreary-eyed 🦹 engineer to get excited&lt;&#x2F;small&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;2-demo&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#2-demo&quot; aria-label=&quot;Anchor link for: 2-demo&quot;&gt;2. Demo&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;envman&lt;&#x2F;code&gt; is a tool built using the Peace framework that:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Downloads a file from Github.&lt;&#x2F;li&gt;
+&lt;li&gt;Creates some AWS resources.&lt;&#x2F;li&gt;
+&lt;li&gt;Uploads the file to AWS.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;The videos below show the beginnings of &quot;ridiculously good&quot;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;2-1-like-git-but-with-infrastructure&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#2-1-like-git-but-with-infrastructure&quot; aria-label=&quot;Anchor link for: 2-1-like-git-but-with-infrastructure&quot;&gt;2.1. Like Git, But With Infrastructure&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;video controls=&quot;controls&quot;&gt;
+    &lt;source src=&quot;2025-01-26_envman_simple_cycle.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;
+    &lt;object data=&quot;2025-01-26_envman_simple_cycle.mp4&quot; &gt;&lt;&#x2F;object&gt;
+&lt;&#x2F;video&gt;
+&lt;p&gt;Regardless of the process, a really nice tool would be able to do the following:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Tell me what the current state of a system is.&lt;&#x2F;li&gt;
+&lt;li&gt;Tell me what will happen, if I were to run the automation.&lt;&#x2F;li&gt;
+&lt;li&gt;Don&#x27;t create twice the resources when I run it twice.&lt;&#x2F;li&gt;
+&lt;li&gt;Don&#x27;t clutter my screen with irrelevant detail.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Do&lt;&#x2F;em&gt; tell me the detail, when I care&lt;sup&gt;2&lt;&#x2F;sup&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Make sure everything is cleaned up.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;These capabilities (among others) allow me to do what I want without needing to worry about making mistakes, or forgetting to clean up resources.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;sup&gt;2&lt;&#x2F;sup&gt; &lt;small&gt;Not shown, but detailed state is stored&lt;&#x2F;small&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;2-2-interruptible&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#2-2-interruptible&quot; aria-label=&quot;Anchor link for: 2-2-interruptible&quot;&gt;2.2. Interruptible&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;video controls=&quot;controls&quot;&gt;
+    &lt;source src=&quot;2025-01-26_envman_interrupt.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;
+    &lt;object data=&quot;2025-01-26_envman_interrupt.mp4&quot; &gt;&lt;&#x2F;object&gt;
+&lt;&#x2F;video&gt;
+&lt;p&gt;If I change my mind, let me stop the process (safely!), change a parameter, and resume the process.&lt;&#x2F;p&gt;
+&lt;p&gt;And don&#x27;t throw away all the work that was done before -- determine what&#x27;s there, and only change the parts that need changing.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;2-3-profiles-like-branches&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#2-3-profiles-like-branches&quot; aria-label=&quot;Anchor link for: 2-3-profiles-like-branches&quot;&gt;2.3. Profiles (like Branches)&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;video controls=&quot;controls&quot;&gt;
+    &lt;source src=&quot;2025-01-26_envman_multi_profile.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;
+    &lt;object data=&quot;2025-01-26_envman_multi_profile.mp4&quot; &gt;&lt;&#x2F;object&gt;
+&lt;&#x2F;video&gt;
+&lt;p&gt;Sometimes I work with multiple environments, so let me switch between them.&lt;&#x2F;p&gt;
+&lt;p&gt;And let me compare the state of two environments -- perhaps one is a replica of the other, so show me what&#x27;s changed.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;2-4-communicate-clearly-recover-cleanly&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#2-4-communicate-clearly-recover-cleanly&quot; aria-label=&quot;Anchor link for: 2-4-communicate-clearly-recover-cleanly&quot;&gt;2.4. Communicate Clearly, Recover Cleanly&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;video controls=&quot;controls&quot;&gt;
+    &lt;source src=&quot;2025-01-26_envman_disconnect.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;
+    &lt;object data=&quot;2025-01-26_envman_disconnect.mp4&quot; &gt;&lt;&#x2F;object&gt;
+&lt;&#x2F;video&gt;
+&lt;p&gt;When something goes wrong, clearly showing which step went wrong (the red one!) and how to recover saves both time and effort in continuing in the flow.&lt;&#x2F;p&gt;
+&lt;p&gt;Bonus points for recovering by simply pressing the &quot;go&quot; button again.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;2-5-visual&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#2-5-visual&quot; aria-label=&quot;Anchor link for: 2-5-visual&quot;&gt;2.5. Visual&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🚧 work-in-progress feature&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;video controls=&quot;controls&quot;&gt;
+    &lt;source src=&quot;2025-01-26_envman_web.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;
+    &lt;object data=&quot;2025-01-26_envman_web.mp4&quot; &gt;&lt;&#x2F;object&gt;
+&lt;&#x2F;video&gt;
+&lt;p&gt;Not everyone works on the command line, and even for the software-inclined, being able to &lt;em&gt;see&lt;&#x2F;em&gt; what each step of the process does, without running the automation, helps build understanding faster than simply seeing a list of steps.&lt;&#x2F;p&gt;
+&lt;p&gt;Having real-time visibility of automation execution makes it clear which resources are interacting.&lt;&#x2F;p&gt;
+&lt;video controls=&quot;controls&quot;&gt;
+    &lt;source src=&quot;2025-01-26_envman_web_error.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;
+    &lt;object data=&quot;2025-01-26_envman_web_error.mp4&quot; &gt;&lt;&#x2F;object&gt;
+&lt;&#x2F;video&gt;
+&lt;p&gt;If there is an error, appropriate styling immediately draws attention to the resources are involved in the error.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Skip ahead to &lt;a href=&quot;https:&#x2F;&#x2F;peace.mk&#x2F;blog&#x2F;checkpoint&#x2F;#5-imagination&quot;&gt;5. Imagination&lt;&#x2F;a&gt; if you don&#x27;t care how it&#x27;s built.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;3-distributing-effort&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#3-distributing-effort&quot; aria-label=&quot;Anchor link for: 3-distributing-effort&quot;&gt;3. Distributing Effort&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;To build tools of this calibre everywhere, practically one would have to separate:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Logic common to items managed by automation (e.g. save &#x2F; load &#x2F; display information).&lt;&#x2F;li&gt;
+&lt;li&gt;Logic to manage a particular item (e.g. download a file).&lt;&#x2F;li&gt;
+&lt;li&gt;Parameters &#x2F; values used in the automation (e.g. use this particular URL).&lt;&#x2F;li&gt;
+&lt;li&gt;The combining of these parts (organisation specific process &#x2F; intellectual property).&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;That way the overall goodness can be provided by the framework, automation logic is extendable and shareable, and everyone gets to keep their secrets.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;object
+    type=&quot;image&#x2F;svg+xml&quot;
+    data=&quot;peace_framework_usage.svg&quot;
+    width=&quot;700&quot;
+    &gt;&lt;&#x2F;object&gt;
+&lt;br&#x2F;&gt;
+&lt;small&gt;&lt;a href=&quot;https:&#x2F;&#x2F;azriel.im&#x2F;dot_ix&#x2F;#src=MQAgogHghgtgDgGwKYC4QGUAuBPZBnEACjwEt5kBKAKAFo6qALEpAJyhYGMHsUqQQoAV0wB7GFEwkRAOwD6JTEhh40AbwC+fEHCRQOqLfx16ksuCxEA3EgBMkN2QhEBzEhzWb+R3ftkAzNhgkAHcRFgBrWUw2BRUQDS1REQQPKippETtZaVgkFS1jfTQAIkBeDcApXcB4P5AABR8kEAAxQJCw8OKC+rMLazsHJ1d3EGK6k20e23sQAbcO7xN-FtCIqJjMOJH6kAAVNbw5gWExCSk5BSUN0sAtnZAAQSPxSRkQAElFZQOklOHATLJq+9Ej1OOxEyQ66UypjseA4+X4QkBJxk8necQAPjRDEQ7JYQAB6EAcMQwQTSBTYEB2PwkaT2aheEBIAB0ziZWJoTRIyAAIiJgtInFAbOyQAA1EgsTCCKAIACyeiYtK0nQW5isk36LjcaAxWMIRJgMGeflJHCeOQQ5PpXmZrJFLzs8BEimkmEZECQHGEpxF6CgfgaNMULBYgjgkgARlzySKAHK5PBwEw2RnSawWaRBV14EUAYWJUGkKcttJAQdYfhMIoA6kgI2XXRWqyrfAFcstItEoLEdZiGdykNTaXCvBz0AwoDoQCI-NMtRwRdyJFBCTI8F2gznEqDvrqGQBGJkgADiFjDBARx3Nc8GWIATEftlBwnkG9p2LlgwQ-GFGQqy+8WIAMxHgAEoWNgEFYrAgKItRbD+LDup63oyGk9jOHkvDwg8SJnKishmF0bZBB2qzdusaAANqXkCyLnMoAA02jEUsbTkbEAC6LamCRrQrBu6yEYUphqr09iOPO1EiYs7bsYJeDMTJYkapJgzcfMvgqX0aluIRXzSV02kSTMHDMV8GmHIi5oohc+k7tRtF4bZTGwTu3FUM4bBwAw1gAF6yBI0QjhhphEtI64xNm2FeE5NkMXgwmsXJAl7GglYIHgSBYspEw6aZ9nJOlMpZVooWyDANLIBFMWaaJeUmfOhXfEBaSYAwSgGPwQQsJhsjBAoDCyBGUBZWg0SCA0oBUkICDrG5sGhtl-DrrgWFYuVM2CHNI4MtSCAILIeATlkGQsOI3wAORAQADDdl1Yvw+2HcdQqmAw0EsGgl13ndD0Mk9XIvSdvEiF6cTXX9j0gM9R0g4FZokJYqAgJD93Q5FIgvnDb3ZGEF3fQArFDAMgJj2OvVkH3I19qO3ejpPk6YlOg+DRMkwDTM41keiSMj7MM5z0RY6YA02O131UXenEPTlyWkfJexJaqDWaoMtVeNYpBRpaOBoDSWskBGyBpAylrOAwmBoAAZOblvQ7DLN4+dMrffuHN7UD3PvZ97P-QDjvwz+bOo+7guewd3sI3zKOXWH-sMlzTtnQTqMACwe14Sfw9TrDffTCdZ8LFPw7zSOx8T6NyyYGv8AAPHXaAAFR25gGMTjoshEk4tPG5NDte8n+Ou6jxOFytxfMzgyBoDYzqKMK1etmxqUUbtXgN83rft5OYXJGEaB99lS-1eq+VSdDm8gC3JAW23jMd3vPeHwg-dYnFpwuev9eN9f28P7vLu+9aZwEECwRAx8GQf3ogRIiCw+JkQUrXMmk8jrTxRnPTAC9TZeAMpfX+N874707t3A+IAvJICQNIKgQA&quot;&gt;source&lt;&#x2F;a&gt;&lt;&#x2F;small&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Using a general purpose programming language to define these parts means:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tooling from that language is available to adhere to best practices.&lt;&#x2F;li&gt;
+&lt;li&gt;The standard packaging system handles publishing and distribution.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;3-1-incentive&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#3-1-incentive&quot; aria-label=&quot;Anchor link for: 3-1-incentive&quot;&gt;3.1 Incentive&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Peace is intended to be low-friction to uptake&lt;sup&gt;3&lt;&#x2F;sup&gt; -- developers who use Peace should not need to write much additional code than what they would have if they were writing basic automation logic.&lt;&#x2F;p&gt;
+&lt;p&gt;It should be a matter of:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Creating types for the parameters and state of the item managed by automation.&lt;&#x2F;li&gt;
+&lt;li&gt;Fitting the automation logic into the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;peace&#x2F;blob&#x2F;0.0.14&#x2F;crate&#x2F;cfg&#x2F;src&#x2F;item.rs&quot;&gt;&lt;code&gt;Item&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; trait.&lt;&#x2F;li&gt;
+&lt;li&gt;Instead of calling each automation step&#x27;s function directly, putting that into a graph structure called a &lt;code&gt;Flow&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Calling the appropriate Peace &lt;code&gt;Cmd&lt;&#x2F;code&gt; with the defined &lt;code&gt;Flow&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;which should be similar effort to writing a tool without the Peace framework.&lt;&#x2F;p&gt;
+&lt;p&gt;For the web diagram, &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;peace&#x2F;blob&#x2F;0.0.14&#x2F;crate&#x2F;cfg&#x2F;src&#x2F;item.rs#L509-L513&quot;&gt;&quot;item interactions&quot;&lt;&#x2F;a&gt; need to be defined, which Peace will combine with other &lt;code&gt;Item&lt;&#x2F;code&gt;s to create a diagram that contains all items.&lt;&#x2F;p&gt;
+&lt;p&gt;In practice, when switching from &quot;just code a quick tool&quot; to &quot;write it using the Peace framework&quot;, anecdotally it&#x27;s switching from 1 unit of effort producing 1 unit of value, to 1.5 units of effort producing 4 units of value.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;sup&gt;3&lt;&#x2F;sup&gt; &lt;small&gt;this statement may not be well-fitting since it&#x27;s written in Rust, but if you were to have written a small automation tool in Rust, it should be nearly identical effort, for significantly more value delivered&lt;&#x2F;small&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;4-side-side-projects&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#4-side-side-projects&quot; aria-label=&quot;Anchor link for: 4-side-side-projects&quot;&gt;4. Side-Side Projects&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;object
+    type=&quot;image&#x2F;svg+xml&quot;
+    data=&quot;peace_side_projects.svg&quot;
+    width=&quot;500&quot;
+    &gt;&lt;&#x2F;object&gt;
+&lt;br&#x2F;&gt;
+&lt;small&gt;&lt;a href=&quot;https:&#x2F;&#x2F;azriel.im&#x2F;dot_ix&#x2F;#src=MQAgogHghgtgDgGwKYC4QGUAuBPZBnEACjwEt5kBKAKAFo6qALEpAJyhYGMHsUqQQWSPDCgA7NAG8AvnxA44SAPqCA5pJn8AZqMUq2cButklRmViwCucTCQBGyI-wAmAe0yKSERyAVQOqEGkqKlEXJyVRWCFeZzcPLxAAIkAkckB4P5BXd09E41NzKxt7AMTAXg3ARb2QEzMWS2s7ZBytHT0oAzREwD4NwBvdkG1dfQZGuWwFZSQ1JJLAId30+SVVIcFhMXbp9KWRUSHff1XAKV30naQcqiQnFWjZTPjFRSO0AG1rzwAaHyQ-JABdXOrawuQt3uIAeVXydSKbyOPya-VaDCBH12IL6LQMUKR31kczGKkRn0eONUGM+MIEQk2+ORDw2YhJ-h+VEwDCQMFQsjwOHwMX4IFC4UU4U0UAsCEweB5vN6JAQCEUeAYUAFoRYIgQaAA5AAmAAMOo1silmhlcoVSqUDBcADdWJqAKz6w2842y+WKgWaFwcCwSkDavUGqVaE1u82KPw2G2a3WOoMgTksFwAayUZuVLlVUHVfoALAGnfwE8nU+6LdbbX6AMz5uNFlOhj1en2avOxoN1kthiMkKN+h1t-hOs4XQVIYWi8WS50htMRDNqls1oMu02lxSWm0sTXVwPLmdrz3e30a1u7o37rscSMBE9LqUdhtzzPZjX9s+8h+z9flre5u8fzBE3rL9D2bPt-0LQDi0fcMrx7G8ADZ8yde4C3jRVRg4FwEAzNB7AsJAgA&quot;&gt;source&lt;&#x2F;a&gt;&lt;&#x2F;small&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;In building this project, besides &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;nginee&quot;&gt;restarting&lt;&#x2F;a&gt; &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;choochoo&quot;&gt;twice&lt;&#x2F;a&gt;, a number of side, side projects were created. The ones that are likely useful on their own are:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;dot_ix&quot;&gt;✒️ &lt;code&gt;dot_ix&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;: Interactive dot graphs (diagrams).&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;interruptible&quot;&gt;🛑 &lt;code&gt;interruptible&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;: Stops a future producer or stream from producing values when interrupted.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;fn_graph&quot;&gt;🧬 &lt;code&gt;fn_graph&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;: Runs interdependent logic concurrently, starting each function when predecessors have completed.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;type_reg&quot;&gt;🗂️ &lt;code&gt;type_reg&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;: Serializable map of any type.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;resman&quot;&gt;🗂️ &lt;code&gt;resman&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;: Runtime managed resource borrowing.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;So in order for Peace to fulfill the &quot;ridiculously good&quot; notion, many side quests just had to be done.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;4-1-dot-ix&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#4-1-dot-ix&quot; aria-label=&quot;Anchor link for: 4-1-dot-ix&quot;&gt;4.1 Dot IX&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;dot_ix&lt;&#x2F;code&gt; in particular has its own &lt;a href=&quot;https:&#x2F;&#x2F;azriel.im&#x2F;dot_ix&#x2F;&quot;&gt;client side application&lt;&#x2F;a&gt; to create SVG diagrams from structured input. I frequently use this to create various technical diagrams.&lt;&#x2F;p&gt;
+&lt;p&gt;My wishlist for &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;dot_ix&quot;&gt;&lt;code&gt;dot_ix&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;For diagram generation, use &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;layout-rs&quot;&gt;&lt;code&gt;layout-rs&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; to generate the SVG in-process instead of delegating to a WASM-compiled GraphViz &lt;code&gt;dot&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Besides performance gains and portability, it may be possible to rasterize the SVG and render a diagram in the terminal.&lt;&#x2F;p&gt;
+&lt;p&gt;However, &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;layout-rs&quot;&gt;&lt;code&gt;layout-rs&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; only supports basic text labels, so a lot more development effort needs to be poured into it to unlock this possibility.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;For styling, instead of using &lt;a href=&quot;https:&#x2F;&#x2F;tailwindcss.com&#x2F;&quot;&gt;&lt;code&gt;tailwindcss&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;&#x27;s non-production CDN JS and &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;dot_ix&#x2F;blob&#x2F;0.9.1&#x2F;crate&#x2F;web_components&#x2F;src&#x2F;dot_svg&#x2F;svg_write_to_clipboard.js#L12-L16&quot;&gt;hacky CSS extraction&lt;&#x2F;a&gt;, switch to &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;encre-css&quot;&gt;&lt;code&gt;encre-css&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Perhaps update &lt;code&gt;encre-css&lt;&#x2F;code&gt; to synchronize with Tailwind CSS 4.0 as well.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;It&#x27;s too far down the priority list for myself to get to in the foreseeable future, but if someone were to do them I&#x27;ll be grateful.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;5-imagination&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#5-imagination&quot; aria-label=&quot;Anchor link for: 5-imagination&quot;&gt;5. Imagination&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;There are nice things I imagined being able to do:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Visually select the items in the process that I want to run, then press go -- subset execution, with an interactive UI over it.&lt;&#x2F;li&gt;
+&lt;li&gt;Selecting a node on the web diagram opens a panel with detailed information about that item.&lt;&#x2F;li&gt;
+&lt;li&gt;Undo the last execution &#x2F; make the environment as it was &lt;em&gt;at this particular point&lt;&#x2F;em&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Reaching that level of simplicity may take a few thousand additional hours of effort.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;6-summary&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#6-summary&quot; aria-label=&quot;Anchor link for: 6-summary&quot;&gt;6. Summary&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Chipping away at this for 5 years, it certainly feels too much for one person.&lt;&#x2F;p&gt;
+&lt;p&gt;I had a plan to get this &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;users&#x2F;azriel91&#x2F;projects&#x2F;1&#x2F;views&#x2F;1?query=sort%3Aupdated-desc+is%3Aopen&quot;&gt;production ready&lt;&#x2F;a&gt; and use it at work, but being on the screen for both work and home activities doesn&#x27;t sit well.&lt;&#x2F;p&gt;
+&lt;p&gt;So either this becomes what I work on full time (through &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sponsors&#x2F;azriel91&quot;&gt;sponsorship&lt;&#x2F;a&gt;), or someone else who has the energy could take it and build upon what&#x27;s there (and hopefully we share the same level of code-pedantry 🕵️).&lt;&#x2F;p&gt;
+&lt;p&gt;Let me know (&lt;a href=&quot;https:&#x2F;&#x2F;discord.gg&#x2F;R6HcASbYAj&quot;&gt;discord&lt;&#x2F;a&gt; &#x2F; email: &lt;code&gt;mail@azriel.im&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Had I Had Time</title>
+        <published>2023-06-29T00:00:00+00:00</published>
+        <updated>2023-06-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://peace.mk/blog/had-i-had-time/"/>
+        <id>https://peace.mk/blog/had-i-had-time/</id>
+        
+        <content type="html" xml:base="https://peace.mk/blog/had-i-had-time/">&lt;blockquote&gt;
+&lt;p&gt;Had I had time, what would perfect automation look like?&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h1 id=&quot;so-far&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#so-far&quot; aria-label=&quot;Anchor link for: so-far&quot;&gt;So Far&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;for-users&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#for-users&quot; aria-label=&quot;Anchor link for: for-users&quot;&gt;For Users&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;From the book of &quot;don&#x27;t overwhelm me while I&#x27;m learning&quot; (or, &lt;em&gt;ever&lt;&#x2F;em&gt;), the user experience has been refined to be understandable and safe.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;solid-foundations&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#solid-foundations&quot; aria-label=&quot;Anchor link for: solid-foundations&quot;&gt;Solid Foundations&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Automation software built using the Peace framework allows users to:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;See what would happen, &lt;em&gt;before&lt;&#x2F;em&gt; making it happen.&lt;&#x2F;li&gt;
+&lt;li&gt;Press &quot;go&quot; multiple times, without adverse effects.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;video controls width=&quot;100%&quot;&gt;&lt;source src=&quot;envman_basic_demo.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;&lt;&#x2F;video&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;changes-of-mind&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#changes-of-mind&quot; aria-label=&quot;Anchor link for: changes-of-mind&quot;&gt;Changes Of Mind&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;There is some resilience to changes of mind and interruptions, and &lt;em&gt;you are not punished for changing your mind&lt;&#x2F;em&gt;:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;video controls width=&quot;100%&quot;&gt;&lt;source src=&quot;envman_interruption_demo.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;&lt;&#x2F;video&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;sub&gt;ℹ️ Also, that state discovery step after interruption won&#x27;t be necessary when &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;peace&#x2F;issues&#x2F;141&quot;&gt;peace#141&lt;&#x2F;a&gt; is implemented&lt;&#x2F;sub&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;profile-support&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#profile-support&quot; aria-label=&quot;Anchor link for: profile-support&quot;&gt;Profile Support&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Peace is designed to support for working with multiple environments; though this part is still early days:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;video controls width=&quot;100%&quot;&gt;&lt;source src=&quot;envman_profile_demo.mp4&quot; type=&quot;video&#x2F;mp4&quot; &#x2F;&gt;&lt;&#x2F;video&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;for-developers&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#for-developers&quot; aria-label=&quot;Anchor link for: for-developers&quot;&gt;For Developers&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;write-code-not-strings&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#write-code-not-strings&quot; aria-label=&quot;Anchor link for: write-code-not-strings&quot;&gt;Write Code, Not Strings&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Type safety, compile time support, and code assist enables:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Easy discovery of what parameters are available – no more searching and pasting large chunks of YAML &#x2F; JSON.&lt;&#x2F;li&gt;
+&lt;li&gt;Errors at compile time – no longer waste time deploying to discover &lt;em&gt;minor&lt;&#x2F;em&gt; issues.&lt;&#x2F;li&gt;
+&lt;li&gt;Writing code to pass values between items, not string templates.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Real code from &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;peace&#x2F;blob&#x2F;0.0.11&#x2F;examples&#x2F;envman&#x2F;src&#x2F;flows&#x2F;env_deploy_flow.rs#L134-L148&quot;&gt;&lt;code&gt;env_deploy_flow.rs@0.0.11&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; iam_role_params_spec = IamRoleParams::&amp;lt;WebApp&amp;gt;::field_wise_spec()
+&lt;&#x2F;span&gt;&lt;span&gt;    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;with_name&lt;&#x2F;span&gt;&lt;span&gt;(iam_role_name)
+&lt;&#x2F;span&gt;&lt;span&gt;    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;with_path&lt;&#x2F;span&gt;&lt;span&gt;(path.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;clone&lt;&#x2F;span&gt;&lt;span&gt;())
+&lt;&#x2F;span&gt;&lt;span&gt;    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;with_managed_policy_arn_from_map&lt;&#x2F;span&gt;&lt;span&gt;(|&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;iam_policy_state&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;IamPolicyState| {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span&gt;IamPolicyState::Some {
+&lt;&#x2F;span&gt;&lt;span&gt;            policy_id_arn_version: Generated::Value(policy_id_arn_version),
+&lt;&#x2F;span&gt;&lt;span&gt;            ..
+&lt;&#x2F;span&gt;&lt;span&gt;        } = iam_policy_state
+&lt;&#x2F;span&gt;&lt;span&gt;        {
+&lt;&#x2F;span&gt;&lt;span&gt;            Some(policy_id_arn_version.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;arn&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;to_string&lt;&#x2F;span&gt;&lt;span&gt;())
+&lt;&#x2F;span&gt;&lt;span&gt;        } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            None
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    })
+&lt;&#x2F;span&gt;&lt;span&gt;    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;no-minor-annoyances&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#no-minor-annoyances&quot; aria-label=&quot;Anchor link for: no-minor-annoyances&quot;&gt;No Minor Annoyances&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;The little things are taken care of:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sorted values for clear and understandable diffs.&lt;&#x2F;li&gt;
+&lt;li&gt;Sensible directory structure for separate and common values within a namespace.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;diff&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-diff &quot;&gt;&lt;code class=&quot;language-diff&quot; data-lang=&quot;diff&quot;&gt;&lt;span&gt;❯ diff -u .peace&#x2F;envman&#x2F;demo_1&#x2F;env_deploy&#x2F;{states_goal.yaml,states_current.yaml}
+&lt;&#x2F;span&gt;&lt;span&gt; iam_role: !Some
+&lt;&#x2F;span&gt;&lt;span&gt;   name: demo_1
+&lt;&#x2F;span&gt;&lt;span&gt;   path: &#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;-  role_id_and_arn: !Tbd null
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;+  role_id_and_arn: !Value
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;+    id: AROASBLNZJUXOTGGPP7PX
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;+    arn: arn:aws:iam::140353555758:role&#x2F;demo_1
+&lt;&#x2F;span&gt;&lt;span&gt;   ..
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre style=&quot;background-color:#04091c;color:#eaeaea;&quot;&gt;&lt;code&gt;&lt;span&gt;repo&#x2F;.peace&#x2F;envman&#x2F;demo_1&#x2F;env_deploy
+&lt;&#x2F;span&gt;&lt;span&gt;     ^      ^      ^      ^
+&lt;&#x2F;span&gt;&lt;span&gt;     |      |      |      &amp;#39;--------- flow: cleanly separate information for different
+&lt;&#x2F;span&gt;&lt;span&gt;     |      |      |                 workflows, e.g. &amp;quot;deploy&amp;quot; vs &amp;quot;load data&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;     |      |      |
+&lt;&#x2F;span&gt;&lt;span&gt;     |      |      &amp;#39;----- profile: logically separates environments
+&lt;&#x2F;span&gt;&lt;span&gt;     |      |
+&lt;&#x2F;span&gt;&lt;span&gt;     |      &amp;#39;----- tool name: allows multiple tools to be run in the same repo
+&lt;&#x2F;span&gt;&lt;span&gt;     |
+&lt;&#x2F;span&gt;&lt;span&gt;     &amp;#39;----- `.peace` data directory, like `.git`
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;em&gt;Take care of the little things, that make the little difference, that make the big difference.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;up-ahead&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#up-ahead&quot; aria-label=&quot;Anchor link for: up-ahead&quot;&gt;Up Ahead&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;There are three dimensions that I&#x27;d like to develop Peace further:&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;production-readiness&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#production-readiness&quot; aria-label=&quot;Anchor link for: production-readiness&quot;&gt;Production Readiness&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;div id=&quot;production_readiness_dot&quot;&gt;&lt;&#x2F;div&gt;
+&lt;p&gt;The lifetime of an environment should be able to exist before, and live beyond, a version of the automation software that manages it.&lt;&#x2F;p&gt;
+&lt;p&gt;For the Peace framework to be a sensible choice to build a production tool, the framework and items must be able to handle evolving data and logic. Namely, handling cases like:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Terminate these servers, recreate the VPC with resized CIDR blocks, then launch new servers in the new VPC.&lt;&#x2F;li&gt;
+&lt;li&gt;This infrastructure was created manually, now it should be automatically managed, and migrated to use new naming conventions.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;users&#x2F;azriel91&#x2F;projects&#x2F;1&quot;&gt;Peace: Production Readiness&lt;&#x2F;a&gt; GitHub project captures this work. See &lt;a href=&quot;https:&#x2F;&#x2F;peace.mk&#x2F;book&#x2F;technical_concepts&#x2F;flow_versioning.html&quot;&gt;Flow Versioning&lt;&#x2F;a&gt; for my technical thinking out loud notes.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;user-interface&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#user-interface&quot; aria-label=&quot;Anchor link for: user-interface&quot;&gt;User Interface&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;div id=&quot;user_interface_dot&quot;&gt;&lt;&#x2F;div&gt;
+&lt;p&gt;Two common methods to access automation are the command line, and the web browser.&lt;&#x2F;p&gt;
+&lt;p&gt;Peace should provide support for:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Invoking commands to interact with the environment.&lt;&#x2F;li&gt;
+&lt;li&gt;Presenting common data – usually &lt;code&gt;States&lt;&#x2F;code&gt;, but also &lt;code&gt;ParamsSpecs&lt;&#x2F;code&gt;, &lt;code&gt;Params&lt;&#x2F;code&gt;, errors, and progress.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Some of the CLI presentation logic currently lives in the &lt;code&gt;envman&lt;&#x2F;code&gt; example, and should be moved into &lt;code&gt;peace&lt;&#x2F;code&gt;, and the web presentation logic is currently &quot;bundle &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;leptos-rs&#x2F;leptos&quot;&gt;&lt;code&gt;leptos&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; with the command line app and render the flow graph&quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;users&#x2F;azriel91&#x2F;projects&#x2F;2&quot;&gt;Peace: UI&lt;&#x2F;a&gt; GitHub project captures the start of this work. For the web UI part, see &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;azriel91&#x2F;peace&#x2F;blob&#x2F;0.0.11&#x2F;DEVELOPMENT.md#web-development&quot;&gt;&lt;code&gt;DEVELOPMENT.md#web-development&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;api-refinement&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#api-refinement&quot; aria-label=&quot;Anchor link for: api-refinement&quot;&gt;API Refinement&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;div id=&quot;api_refinement_dot&quot;&gt;&lt;&#x2F;div&gt;
+&lt;p&gt;There is some API that doesn&#x27;t prevent developers from making mistakes or having mild annoyances through natural usage of the API.&lt;&#x2F;p&gt;
+&lt;p&gt;The API should be refined to avoid setting up such situations, and implement additional functionality that makes it easier to work with information across profiles or across flows.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;users&#x2F;azriel91&#x2F;projects&#x2F;3&quot;&gt;Peace: API Refinement and Features&lt;&#x2F;a&gt; GitHub project captures this work.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Had I had time, developing these would be excellent.&lt;&#x2F;p&gt;
+&lt;p&gt;But I don&#x27;t – I&#x27;m off to work!&lt;br &#x2F;&gt;
+🏃🏽‍♂️💨&lt;&#x2F;p&gt;
+&lt;script type=&quot;text&#x2F;javascript&quot;&gt;
+&#x2F;&#x2F; Hack to set the playback rate for videos.
+&#x2F;&#x2F; You can&#x27;t set it in the HTML element.
+document.querySelectorAll(&quot;video&quot;).forEach(v =&gt; { v.playbackRate = 2.0; });
+&lt;&#x2F;script&gt;
+&lt;script type=&quot;module&quot;&gt;
+    import { Graphviz } from &quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;@hpcc-js&#x2F;wasm&#x2F;dist&#x2F;graphviz.js&quot;;
+
+    const graphviz = await Graphviz.load();
+    const production_readiness_dot = `digraph G {
+        graph [
+            penwidth  = 0
+            nodesep   = 0.1
+            ranksep   = 0.3
+            bgcolor   = &quot;transparent&quot;
+            fontname  = &quot;helvetica&quot;
+            fontsize  = 12
+            fontcolor = &quot;#9f9f9f&quot;
+            splines   = line
+            rankdir   = LR
+        ]
+        node [
+            penwidth  = 4
+            fontcolor = &quot;#111111&quot;
+            fontname  = &quot;monospace&quot;
+            fontsize  = 9
+            shape     = &quot;circle&quot;
+            style     = &quot;filled&quot;
+            width     = 0.25
+            height    = 0.25
+            margin    = 0.04
+            color     = &quot;#9999aa&quot;
+            fillcolor = &quot;#ddddf5&quot;
+        ]
+        edge [
+            penwidth  = 1
+            arrowsize = 0.5
+            color     = &quot;#7f7f7f&quot;
+            fontcolor = &quot;#7f7f7f&quot;
+        ]
+
+        subgraph cluster_env_v1 {
+            label = &quot;env_v1&quot;
+            labelloc = &quot;bottom&quot;
+
+            env_v1_a [label = &quot;&quot;]
+            env_v1_b [label = &quot;&quot;]
+            env_v1_c [label = &quot;&quot;]
+            env_v1_d [label = &quot;&quot;]
+            env_v1_e [label = &quot;&quot;, style = &quot;invis&quot;]
+
+            env_v1_a -&gt; env_v1_b
+            env_v1_a -&gt; env_v1_c
+            env_v1_b -&gt; env_v1_d
+            env_v1_b -&gt; env_v1_e [style = &quot;invis&quot;]
+            env_v1_c -&gt; env_v1_e [style = &quot;invis&quot;]
+        }
+
+        subgraph cluster_env_v2 {
+            label = &quot;env_v2&quot;
+            labelloc = &quot;bottom&quot;
+
+            env_v2_a [label = &quot;&quot;]
+            env_v2_b [label = &quot;&quot;]
+            env_v2_c [label = &quot;&quot;]
+            env_v2_d [label = &quot;&quot;]
+            env_v2_e [label = &quot;&quot;, color=&quot;#449966&quot;, fillcolor=&quot;#88cc88&quot;]
+
+            env_v2_a -&gt; env_v2_b
+            env_v2_a -&gt; env_v2_c
+            env_v2_b -&gt; env_v2_d
+            env_v2_b -&gt; env_v2_e
+            env_v2_c -&gt; env_v2_e
+        }
+
+        subgraph cluster_env_v3 {
+            label = &quot;env_v3&quot;
+            labelloc = &quot;bottom&quot;
+
+            env_v3_a [label = &quot;&quot;]
+            env_v3_b [label = &quot;&quot;, color=&quot;#994444&quot;, fillcolor=&quot;#cc8888&quot;]
+            env_v3_c [label = &quot;&quot;]
+            env_v3_d [label = &quot;&quot;, color=&quot;#994444&quot;, fillcolor=&quot;#88cc88&quot;, style=&quot;dashed,filled&quot;]
+            env_v3_e [label = &quot;&quot;, color=&quot;#994444&quot;, fillcolor=&quot;#88cc88&quot;, style=&quot;dashed,filled&quot;]
+
+            env_v3_a -&gt; env_v3_b
+            env_v3_a -&gt; env_v3_c
+            env_v3_b -&gt; env_v3_d
+            env_v3_b -&gt; env_v3_e
+            env_v3_c -&gt; env_v3_e
+        }
+
+        env_v1_d -&gt; env_v2_a [style = &quot;invis&quot;]
+        env_v1_e -&gt; env_v2_a [style = &quot;invis&quot;]
+
+        env_v2_d -&gt; env_v3_a [style = &quot;invis&quot;]
+        env_v2_e -&gt; env_v3_a [style = &quot;invis&quot;]
+    }`;
+    document.getElementById(&quot;production_readiness_dot&quot;).innerHTML = graphviz.layout(production_readiness_dot, &quot;svg&quot;, &quot;dot&quot;);
+
+    const user_interface_dot = `digraph G {
+        graph [
+            margin    = 0.0
+            penwidth  = 0
+            nodesep   = 0.0
+            ranksep   = 0.02
+            bgcolor   = &quot;transparent&quot;
+            fontname  = &quot;helvetica&quot;
+            fontcolor = &quot;#7f7f7f&quot;
+            rankdir   = LR
+            splines   = line
+        ]
+        node [
+            fontcolor = &quot;#111111&quot;
+            fontname  = &quot;monospace&quot;
+            fontsize  = 12
+            shape     = &quot;circle&quot;
+            style     = &quot;filled&quot;
+            width     = 0.3
+            height    = 0.3
+            margin    = 0.04
+            color     = &quot;#9999aa&quot;
+            fillcolor = &quot;#ddddf5&quot;
+            penwidth  = 3
+        ]
+        edge [
+            arrowsize = 0.7
+            color     = &quot;#7f7f7f&quot;
+            fontcolor = &quot;#7f7f7f&quot;
+            penwidth  = 3
+        ]
+
+        subgraph cluster_a {
+            node [color=&quot;#449966&quot; fillcolor=&quot;#99dd99&quot;]
+            a [label = &lt;&lt;b&gt;a&lt;&#x2F;b&gt;&gt;]
+            a_text [shape=&quot;plain&quot; style=&quot;&quot; fontcolor=&quot;#7f7f7f&quot; label = &lt;&lt;table border=&quot;0&quot; cellborder=&quot;0&quot; cellpadding=&quot;0&quot;&gt;&lt;tr&gt;
+                &lt;td&gt;&lt;font point-size=&quot;15&quot;&gt;📥&lt;&#x2F;font&gt;&lt;&#x2F;td&gt;
+                &lt;td balign=&quot;left&quot;&gt;file&lt;br&#x2F;&gt;download&lt;&#x2F;td&gt;
+            &lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&gt;]
+        }
+
+        subgraph cluster_b {
+            node [color=&quot;#446699&quot; fillcolor=&quot;#99aaee&quot;]
+            b [label = &lt;&lt;b&gt;b&lt;&#x2F;b&gt;&gt; class=&quot;item_b_in_progress&quot; style=&quot;dashed,filled&quot;]
+            b_text [shape=&quot;plain&quot; style=&quot;&quot; fontcolor=&quot;#7f7f7f&quot; label = &lt;&lt;table border=&quot;0&quot; cellborder=&quot;0&quot; cellpadding=&quot;0&quot;&gt;&lt;tr&gt;
+                &lt;td&gt;&lt;font point-size=&quot;15&quot;&gt;🪣&lt;&#x2F;font&gt;&lt;&#x2F;td&gt;
+                &lt;td balign=&quot;left&quot;&gt;s3&lt;br&#x2F;&gt;bucket&lt;&#x2F;td&gt;
+            &lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&gt;]
+        }
+
+        subgraph cluster_c {
+            c [label = &lt;&lt;b&gt;c&lt;&#x2F;b&gt;&gt;]
+            c_text [shape=&quot;plain&quot; style=&quot;&quot; fontcolor=&quot;#7f7f7f&quot; label = &lt;&lt;table border=&quot;0&quot; cellborder=&quot;0&quot; cellpadding=&quot;0&quot;&gt;&lt;tr&gt;
+                &lt;td&gt;&lt;font point-size=&quot;15&quot;&gt;📤&lt;&#x2F;font&gt;&lt;&#x2F;td&gt;
+                &lt;td balign=&quot;left&quot;&gt;s3&lt;br&#x2F;&gt;object&lt;&#x2F;td&gt;
+            &lt;&#x2F;tr&gt;&lt;&#x2F;table&gt;&gt;]
+        }
+
+        a -&gt; c [minlen = 9, color=&quot;#66aa66&quot;]
+        b -&gt; c [minlen = 9, color=&quot;#6688bb&quot;]
+    }`;
+    document.getElementById(&quot;user_interface_dot&quot;).innerHTML = graphviz.layout(user_interface_dot, &quot;svg&quot;, &quot;dot&quot;);
+&lt;&#x2F;script&gt;
+&lt;style type=&quot;text&#x2F;css&quot;&gt;
+.item_b_in_progress ellipse {
+    animation: 10.0s linear forwards 0.0s infinite item_b_in_progress;
+}
+@keyframes item_b_in_progress {
+    0% {
+        transform-origin: 42.16px -56px;
+&#x2F;*        transform-origin: attr(cx px) attr(cy px);*&#x2F;
+        transform: rotate(0deg);
+    }
+    100% {
+        transform-origin: 42.16px -56px;
+&#x2F;*        transform-origin: attr(cx px) attr(cy px);*&#x2F;
+        transform: rotate(360deg);
+    }
+}
+&lt;&#x2F;style&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Conceptual Introduction</title>
+        <published>2023-04-03T00:00:00+00:00</published>
+        <updated>2023-04-03T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://peace.mk/blog/conceptual-introduction/"/>
+        <id>https://peace.mk/blog/conceptual-introduction/</id>
+        
+        <content type="html" xml:base="https://peace.mk/blog/conceptual-introduction/">&lt;p&gt;How does the Peace framework shape automation to be resilient and provide a good user experience?&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;automation-model&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#automation-model&quot; aria-label=&quot;Anchor link for: automation-model&quot;&gt;Automation Model&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The following is a simplified model of what is used in the Peace framework, and is for teaching, not for accuracy.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Imagine we have the following automation steps:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Compile an application.&lt;&#x2F;li&gt;
+&lt;li&gt;Launch a server.&lt;&#x2F;li&gt;
+&lt;li&gt;Upload the application to the server.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+ &lt;div id=&quot;automation_process_dot&quot;&gt;&lt;&#x2F;div&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Each of these steps is a write function, connected together:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;app_compile&lt;&#x2F;span&gt;&lt;span&gt;()   -&amp;gt; _ { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;cargo build&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;srvr_launch&lt;&#x2F;span&gt;&lt;span&gt;()   -&amp;gt; _ { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;ec2 run-instances ..&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_upload&lt;&#x2F;span&gt;&lt;span&gt;(..) -&amp;gt; _ { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;scp {src} user@{ip}:{dest}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Invoke the functions
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; path = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;app_compile&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; ip   = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;server_launch&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span&gt;_    = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;file_upload&lt;&#x2F;span&gt;&lt;span&gt;(path, dest, ip);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Instead of only having a write function for each step, we define read functions:&lt;&#x2F;p&gt;
+&lt;p&gt;The following show 3 functions for each step:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Current state.&lt;&#x2F;li&gt;
+&lt;li&gt;Goal state.&lt;&#x2F;li&gt;
+&lt;li&gt;Logic to change the current state into the goal state.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Application
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;app_last_ts&lt;&#x2F;span&gt;&lt;span&gt;(..) -&amp;gt; Time { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;stat -c &amp;#39;%Y&amp;#39; target&#x2F;debug&#x2F;app&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;app_src_ts&lt;&#x2F;span&gt;&lt;span&gt;(..)  -&amp;gt; Time { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;stat -c &amp;#39;%Y&amp;#39; **&#x2F;*.rs&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;app_compile&lt;&#x2F;span&gt;&lt;span&gt;(..) -&amp;gt; _    { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;cargo build&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Server
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;srvr_status&lt;&#x2F;span&gt;&lt;span&gt;(..) -&amp;gt; Srvr { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;ec2 describe-instances ..&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;srvr_spec&lt;&#x2F;span&gt;&lt;span&gt;(..)   -&amp;gt; Srvr { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;cat server.yaml&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;srvr_launch&lt;&#x2F;span&gt;&lt;span&gt;(..) -&amp;gt; _    { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;ec2 run-instances ..&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; File Upload
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_dest&lt;&#x2F;span&gt;&lt;span&gt;(..)   -&amp;gt; Md5Sum { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;ssh user@{ip} -C &amp;#39;md5sum {dest}&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_src&lt;&#x2F;span&gt;&lt;span&gt;(..)    -&amp;gt; Md5Sum { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;md5sum {src}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_upload&lt;&#x2F;span&gt;&lt;span&gt;(..) -&amp;gt; _      { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;scp {src} user@{ip}:{dest}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;With the current and goal states, we can calculate a diff, and whether we need to do work:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Application
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;app_ts_diff&lt;&#x2F;span&gt;&lt;span&gt;(Time, Time)      -&amp;gt; TimeDiff { .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;app_compile_needed&lt;&#x2F;span&gt;&lt;span&gt;(TimeDiff) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span&gt;{ .. }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Server
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;srvr_diff&lt;&#x2F;span&gt;&lt;span&gt;(Srvr, Srvr)        -&amp;gt; SrvrDiff { .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;srvr_launch_needed&lt;&#x2F;span&gt;&lt;span&gt;(SrvrDiff) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span&gt;{ .. }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; File Upload
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_diff&lt;&#x2F;span&gt;&lt;span&gt;(Md5Sum, Md5Sum)      -&amp;gt; Md5SumDiff { .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_upload_needed&lt;&#x2F;span&gt;&lt;span&gt;(Md5SumDiff) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;bool       &lt;&#x2F;span&gt;&lt;span&gt;{ .. }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Put these functions and data types into a trait:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Specific functions
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_dest&lt;&#x2F;span&gt;&lt;span&gt;(..)                  -&amp;gt; Md5Sum { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;ssh user@{ip} -C &amp;#39;md5sum {dest}&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_src&lt;&#x2F;span&gt;&lt;span&gt;(..)                   -&amp;gt; Md5Sum { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;md5sum {src}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_diff&lt;&#x2F;span&gt;&lt;span&gt;(Md5Sum, Md5Sum)      -&amp;gt; Md5SumDiff { .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_upload_needed&lt;&#x2F;span&gt;&lt;span&gt;(Md5SumDiff) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;bool       &lt;&#x2F;span&gt;&lt;span&gt;{ .. }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;file_upload&lt;&#x2F;span&gt;&lt;span&gt;(..)                -&amp;gt; _      { sh!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;scp {src} user@{ip}:{dest}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;); .. }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Genericized grouping of step functions, and data.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;trait &lt;&#x2F;span&gt;&lt;span&gt;ItemSpec {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;State;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;StateDiff;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;state_current&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;State;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;state_goal&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;State;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;state_diff&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;State, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;State) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;StateDiff;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;check&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;StateDiff) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;bool&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;State, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;State, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self::&lt;&#x2F;span&gt;&lt;span&gt;StateDiff);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Peace groups all the items into a graph:&lt;&#x2F;p&gt;
+ &lt;div id=&quot;item_spec_graph_dot&quot;&gt;&lt;&#x2F;div&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Peace provides &lt;em&gt;commands&lt;&#x2F;em&gt; to run different combinations of each item&#x27;s functions:&lt;&#x2F;p&gt;
+ &lt;div id=&quot;flows_dot&quot;&gt;&lt;&#x2F;div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;StatesDiscoverCmd&lt;&#x2F;code&gt;: Runs &lt;code&gt;state_current&lt;&#x2F;code&gt; for all items.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;ApplyCmd&lt;&#x2F;code&gt;: Given a target state, runs the following for all items:
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;state_current&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;state_goal&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;diff&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;check&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;apply&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h1 id=&quot;ending-note&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#ending-note&quot; aria-label=&quot;Anchor link for: ending-note&quot;&gt;Ending Note&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Peace implements other concepts to provide resilience and good user experience, and these will be written in future posts.&lt;&#x2F;p&gt;
+&lt;p&gt;Peace is still evolving, and is not ready for general adoption.&lt;&#x2F;p&gt;
+&lt;script type=&quot;module&quot;&gt;
+    import { Graphviz } from &quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;@hpcc-js&#x2F;wasm&#x2F;dist&#x2F;graphviz.js&quot;;
+
+    const graphviz = await Graphviz.load();
+    const automation_process_dot = `digraph G {
+        graph [
+            penwidth  = 0
+            nodesep   = 0.0
+            ranksep   = 0.8
+            bgcolor   = &quot;transparent&quot;
+            fontname  = &quot;helvetica&quot;
+            fontcolor = &quot;#7f7f7f&quot;
+            splines   = line
+            rankdir   = LR
+        ]
+        node [
+            penwidth  = 3
+            fontcolor = &quot;#111111&quot;
+            fontname  = &quot;monospace&quot;
+            fontsize  = 12
+            shape     = &quot;circle&quot;
+            style     = &quot;filled&quot;
+            width     = 0.3
+            height    = 0.3
+            margin    = 0.04
+            color     = &quot;#9999aa&quot;
+            fillcolor = &quot;#ddddf5&quot;
+        ]
+        edge [
+            penwidth  = 2
+            arrowsize = 0.7
+            color     = &quot;#7f7f7f&quot;
+            fontcolor = &quot;#7f7f7f&quot;
+        ]
+
+        subgraph cluster_a {
+            a [label = &lt;&lt;b&gt;a&lt;&#x2F;b&gt;&gt;]
+            a_text [shape=&quot;plain&quot; style=&quot;none&quot; fontcolor=&quot;#7f7f7f&quot; label = &lt;app&lt;br&#x2F;&gt;compile&gt;]
+        }
+        subgraph cluster_b {
+            margin = 0
+
+            b [label = &lt;&lt;b&gt;b&lt;&#x2F;b&gt;&gt;]
+            b_text [shape=&quot;plain&quot; style=&quot;none&quot; fontcolor=&quot;#7f7f7f&quot; label = &lt;server&lt;br&#x2F;&gt;launch&gt;]
+        }
+        subgraph cluster_c {
+            c [label = &lt;&lt;b&gt;c&lt;&#x2F;b&gt;&gt;]
+            c_text [shape=&quot;plain&quot; style=&quot;none&quot; fontcolor=&quot;#7f7f7f&quot; label = &lt;file&lt;br&#x2F;&gt;upload&gt;]
+        }
+
+        a -&gt; b
+        b -&gt; c
+    }`;
+    document.getElementById(&quot;automation_process_dot&quot;).innerHTML = graphviz.layout(automation_process_dot, &quot;svg&quot;, &quot;dot&quot;);
+
+    const item_spec_graph_dot = `digraph G {
+        graph [
+            penwidth  = 0
+            nodesep   = 0.5
+            ranksep   = 0.6
+            bgcolor   = &quot;transparent&quot;
+            fontcolor = &quot;#7f7f7f&quot;
+            splines   = line
+            rankdir   = LR
+        ]
+        node [
+            penwidth  = 3
+            fontcolor = &quot;#111111&quot;
+            fontname  = &quot;monospace&quot;
+            fontsize  = 12
+            shape     = &quot;circle&quot;
+            style     = &quot;filled&quot;
+            width     = 0.6
+            height    = 0.6
+            margin    = 0.04
+            color     = &quot;#9999aa&quot;
+            fillcolor = &quot;#ddddf5&quot;
+        ]
+        edge [
+            penwidth  = 2
+            arrowsize = 0.7
+            color     = &quot;#7f7f7f&quot;
+            fontcolor = &quot;#7f7f7f&quot;
+        ]
+
+        a [label = &lt;&lt;b&gt;a&lt;&#x2F;b&gt;&gt;]
+        b [label = &lt;&lt;b&gt;b&lt;&#x2F;b&gt;&gt;]
+        c [label = &lt;&lt;b&gt;c&lt;&#x2F;b&gt;&gt;]
+        d [label = &lt;&lt;b&gt;d&lt;&#x2F;b&gt;&gt;]
+        e [label = &lt;&lt;b&gt;e&lt;&#x2F;b&gt;&gt;]
+
+        a -&gt; b
+        a -&gt; c
+        b -&gt; d
+        b -&gt; e
+        c -&gt; e
+    }`;
+    document.getElementById(&quot;item_spec_graph_dot&quot;).innerHTML = graphviz.layout(item_spec_graph_dot, &quot;svg&quot;, &quot;dot&quot;);
+
+    const flows_dot = `digraph G {
+        graph [
+            penwidth  = 0
+            nodesep   = 0.1
+            ranksep   = 0.3
+            bgcolor   = &quot;transparent&quot;
+            fontname  = &quot;helvetica&quot;
+            fontsize  = 12
+            fontcolor = &quot;#9f9f9f&quot;
+            splines   = line
+            rankdir   = LR
+        ]
+        node [
+            penwidth  = 4
+            fontcolor = &quot;#111111&quot;
+            fontname  = &quot;monospace&quot;
+            fontsize  = 9
+            shape     = &quot;circle&quot;
+            style     = &quot;filled&quot;
+            width     = 0.25
+            height    = 0.25
+            margin    = 0.04
+            color     = &quot;#9999aa&quot;
+            fillcolor = &quot;#ddddf5&quot;
+        ]
+        edge [
+            penwidth  = 1
+            arrowsize = 0.5
+            color     = &quot;#7f7f7f&quot;
+            fontcolor = &quot;#7f7f7f&quot;
+        ]
+
+        subgraph cluster_ensure_exec {
+            label = &quot;apply&quot;
+
+            node [color=&quot;#449966&quot; fillcolor=&quot;#88cc88&quot;]
+
+            ensure_exec_a [label = &quot;&quot;]
+            ensure_exec_b [label = &quot;&quot;]
+            ensure_exec_c [label = &quot;&quot;]
+            ensure_exec_d [label = &quot;&quot; fillcolor=&quot;#ddddaa&quot; style=&quot;dashed,filled&quot;]
+            ensure_exec_e [label = &quot;&quot; fillcolor=&quot;#ddddaa&quot; style=&quot;dashed,filled&quot;]
+
+            ensure_exec_a -&gt; ensure_exec_b
+            ensure_exec_a -&gt; ensure_exec_c
+            ensure_exec_b -&gt; ensure_exec_d
+            ensure_exec_b -&gt; ensure_exec_e
+            ensure_exec_c -&gt; ensure_exec_e
+        }
+
+        subgraph cluster_clean_exec {
+            label = &quot;clean&quot;
+
+            node [color=&quot;#884499&quot; fillcolor=&quot;#ccaadd&quot;]
+            edge [dir = back]
+
+            clean_exec_a [label = &quot;&quot; color=&quot;#aaaa55&quot; fillcolor=&quot;#ddddaa&quot;]
+            clean_exec_b [label = &quot;&quot; fillcolor=&quot;#ddddaa&quot; style=&quot;dashed,filled&quot;]
+            clean_exec_c [label = &quot;&quot; fillcolor=&quot;#ddddaa&quot; style=&quot;dashed,filled&quot;]
+            clean_exec_d [label = &quot;&quot;]
+            clean_exec_e [label = &quot;&quot;]
+
+            clean_exec_a -&gt; clean_exec_b
+            clean_exec_a -&gt; clean_exec_c
+            clean_exec_b -&gt; clean_exec_d
+            clean_exec_b -&gt; clean_exec_e
+            clean_exec_c -&gt; clean_exec_e
+        }
+
+        subgraph cluster_state_current {
+            label = &quot;current state&quot;
+
+            node [color=&quot;#aaaa55&quot; fillcolor=&quot;#ddddaa&quot;]
+
+            state_current_a [label = &quot;&quot;]
+            state_current_b [label = &quot;&quot;]
+            state_current_c [label = &quot;&quot;]
+            state_current_d [label = &quot;&quot;]
+            state_current_e [label = &quot;&quot;]
+
+            state_current_a -&gt; state_current_b
+            state_current_a -&gt; state_current_c
+            state_current_b -&gt; state_current_d
+            state_current_b -&gt; state_current_e
+            state_current_c -&gt; state_current_e
+        }
+
+        subgraph cluster_state_goal {
+            label = &quot;goal state&quot;
+
+            node [color=&quot;#449966&quot; fillcolor=&quot;#ddddaa&quot;]
+
+            state_goal_a [label = &quot;&quot;]
+            state_goal_b [label = &quot;&quot;]
+            state_goal_c [label = &quot;&quot;]
+            state_goal_d [label = &quot;&quot;]
+            state_goal_e [label = &quot;&quot;]
+
+            state_goal_a -&gt; state_goal_b [weight = 4]
+            state_goal_a -&gt; state_goal_c [weight = 3]
+            state_goal_b -&gt; state_goal_d
+            state_goal_b -&gt; state_goal_e
+            state_goal_c -&gt; state_goal_e
+        }
+
+        subgraph cluster_state_clean {
+            label = &quot;clean state&quot;
+
+            node [color=&quot;#884499&quot; fillcolor=&quot;#ddddaa&quot;]
+            edge [dir = back]
+
+            state_clean_a [label = &quot;&quot;]
+            state_clean_b [label = &quot;&quot;]
+            state_clean_c [label = &quot;&quot;]
+            state_clean_d [label = &quot;&quot;]
+            state_clean_e [label = &quot;&quot;]
+
+            state_clean_a -&gt; state_clean_b [weight = 4]
+            state_clean_a -&gt; state_clean_c [weight = 3]
+            state_clean_b -&gt; state_clean_d
+            state_clean_b -&gt; state_clean_e
+            state_clean_c -&gt; state_clean_e
+        }
+
+        state_current_a -&gt; state_goal_a [style = &quot;invis&quot;]
+        state_current_a -&gt; state_clean_a [style = &quot;invis&quot;]
+        state_goal_d -&gt; ensure_exec_a [style = &quot;invis&quot;]
+        state_goal_e -&gt; ensure_exec_a [style = &quot;invis&quot;]
+        state_clean_d -&gt; clean_exec_a [style = &quot;invis&quot;]
+        state_clean_e -&gt; clean_exec_a [style = &quot;invis&quot;]
+    }`;
+    document.getElementById(&quot;flows_dot&quot;).insertAdjacentHTML(
+        &quot;afterbegin&quot;,
+        graphviz.layout(flows_dot, &quot;svg&quot;, &quot;dot&quot;)
+    );
+&lt;&#x2F;script&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Compile Time Correctness: Type State</title>
+        <published>2023-02-17T00:00:00+00:00</published>
+        <updated>2023-02-17T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://peace.mk/blog/compile-time-correctness-type-state/"/>
+        <id>https://peace.mk/blog/compile-time-correctness-type-state/</id>
+        
+        <content type="html" xml:base="https://peace.mk/blog/compile-time-correctness-type-state/">&lt;blockquote&gt;
+&lt;p&gt;This post is code heavy, and is best viewed on a large screen.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Recently I have gotten into &quot;compile-time-safe-but-still-ergonomic&quot; API obsession.&lt;&#x2F;p&gt;
+&lt;p&gt;This post will demonstrate an implementation of the type state design pattern, where methods are not able to be called until calling them is a valid operation.&lt;&#x2F;p&gt;
+&lt;p&gt;Future posts will cover how maintaining compile-time safety &lt;em&gt;while keeping the API ergonomic&lt;&#x2F;em&gt; becomes increasingly difficult to maintain, and approaches used to address these burdens.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;builder-api-runtime-safety-vs-compile-time-safety&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#builder-api-runtime-safety-vs-compile-time-safety&quot; aria-label=&quot;Anchor link for: builder-api-runtime-safety-vs-compile-time-safety&quot;&gt;Builder API: Runtime Safety vs Compile Time Safety&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;For starters, let&#x27;s look at a simple case of creating a compile-time safe API using type state.&lt;&#x2F;p&gt;
+&lt;p&gt;We want to create a &lt;code&gt;Cmd&lt;&#x2F;code&gt; that contains the following two fields:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;: Profile,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;other_field&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;Profile(String);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We will compare a runtime safe builder API to a compile-time safe builder API.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;runtime-safe&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#runtime-safe&quot; aria-label=&quot;Anchor link for: runtime-safe&quot;&gt;Runtime Safe&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;For this API, this is the usage we want to end up with:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Ok!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd = CmdBuilder::new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e78c45;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(Profile(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()))
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;unwrap&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Runtime error!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd = CmdBuilder::new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e78c45;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;unwrap&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; thread &amp;#39;main&amp;#39; panicked at &amp;#39;called `Result::unwrap()` on an `Err` value: &amp;quot;Cmd profile must be selected&amp;quot;&amp;#39;, src&#x2F;main.rs:11:10
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Notably, &lt;code&gt;builder.build()&lt;&#x2F;code&gt; may fail at runtime, but it is &quot;runtime safe&quot; because it isn&#x27;t possible to have a &lt;code&gt;Cmd&lt;&#x2F;code&gt; without unwrapping the result. At compile time, an API consumer is informed that &quot;this is fallible&quot; through a &lt;code&gt;Result&amp;lt;Cmd, String&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This &lt;code&gt;CmdBuilder&lt;&#x2F;code&gt; API has the following:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;new&lt;&#x2F;code&gt; function which initializes the profile to a placeholder &quot;unset&quot; value.&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;with_profile&lt;&#x2F;code&gt; function which sets the profile.&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;build&lt;&#x2F;code&gt; function which fails if the profile has not been set.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Code:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;ProfileSelection {
+&lt;&#x2F;span&gt;&lt;span&gt;    None,
+&lt;&#x2F;span&gt;&lt;span&gt;    Value(Profile),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;profile_selection&lt;&#x2F;span&gt;&lt;span&gt;: ProfileSelection,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;other_field&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;new&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;other_field&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection: ProfileSelection::None,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;mut &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;: Profile) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.profile_selection = ProfileSelection::Value(profile);
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; Result&amp;lt;Cmd, String&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Deconstruct self.
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        } = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; profile = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; profile_selection {
+&lt;&#x2F;span&gt;&lt;span&gt;            ProfileSelection::None =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;Err(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;Cmd profile must be selected&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()),
+&lt;&#x2F;span&gt;&lt;span&gt;            ProfileSelection::Value(profile) =&amp;gt; profile,
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        Ok(Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        })
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;allow&lt;&#x2F;span&gt;&lt;span&gt;(dead_code)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;: Profile,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;other_field&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;Profile(String);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;compile-time-safe&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#compile-time-safe&quot; aria-label=&quot;Anchor link for: compile-time-safe&quot;&gt;Compile Time Safe&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;For this API, this is the usage we want to end up with:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Ok!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd = CmdBuilder::new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e78c45;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(Profile(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()))
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Compile error!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd = CmdBuilder::new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e78c45;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F;    |                         ^^^^^ method not found in `CmdBuilder&amp;lt;ProfileSelectionNone&amp;gt;`
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; ...
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; 15 | struct CmdBuilder&amp;lt;ProfileSelection&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F;    | -------------------------------------- method `build` not found for this struct
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F;    |
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F;    = note: the method was found for
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F;            - `CmdBuilder&amp;lt;ProfileSelectionValue&amp;gt;`
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In this case, &lt;code&gt;builder.build()&lt;&#x2F;code&gt; is not fallible -- it returns a &lt;code&gt;Cmd&lt;&#x2F;code&gt;  instead of a &lt;code&gt;Result&amp;lt;Cmd, _&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This &lt;code&gt;CmdBuilder&lt;&#x2F;code&gt; API has the following:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;new&lt;&#x2F;code&gt; function which exists for an unset profile type state.&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;with_profile&lt;&#x2F;code&gt; function which sets the profile for that type state.&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;build&lt;&#x2F;code&gt; function cannot even be called if the profile isn&#x27;t set.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;with_profile&lt;&#x2F;code&gt; cannot be called twice, making it impossible for overwrites.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;With this approach, an API consumer does not have to propagate the error up to the user, because &lt;em&gt;there is none&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Code:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Type states
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ProfileSelectionNone;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ProfileSelectionValue(Profile);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelection&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;profile_selection&lt;&#x2F;span&gt;&lt;span&gt;: ProfileSelection,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;other_field&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionNone&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;new&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;other_field&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection: ProfileSelectionNone,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;: Profile) -&amp;gt; CmdBuilder&amp;lt;ProfileSelectionValue&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection: _,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        } = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; profile_selection = ProfileSelectionValue(profile);
+&lt;&#x2F;span&gt;&lt;span&gt;        CmdBuilder {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionValue&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Deconstruct self.
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection: ProfileSelectionValue(profile),
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        } = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;allow&lt;&#x2F;span&gt;&lt;span&gt;(dead_code)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;: Profile,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;other_field&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;Profile(String);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;more-variants&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#more-variants&quot; aria-label=&quot;Anchor link for: more-variants&quot;&gt;More Variants&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Seems nice. What if there are more variants to selecting a profile?&lt;&#x2F;p&gt;
+&lt;p&gt;The following shows what it would be like to add more variants while keeping compile-time safety:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;First, we need to add another type state type.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;diff&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-diff &quot;&gt;&lt;code class=&quot;language-diff&quot; data-lang=&quot;diff&quot;&gt;&lt;span&gt; &#x2F;&#x2F; Type states
+&lt;&#x2F;span&gt;&lt;span&gt; struct ProfileSelectionNone;
+&lt;&#x2F;span&gt;&lt;span&gt; struct ProfileSelectionValue(Profile);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;+&#x2F;&#x2F;&#x2F; Use the last used profile
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;+struct ProfileSelectionLastUsed;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Next, add behaviour to the relevant &lt;code&gt;impl&lt;&#x2F;code&gt; blocks:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionNone&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; fn new ..
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; fn with_profile ..
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;with_profile_last_used&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; CmdBuilder&amp;lt;ProfileSelectionLastUsed&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection: _,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        } = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; profile_selection = ProfileSelectionLastUsed;
+&lt;&#x2F;span&gt;&lt;span&gt;        CmdBuilder {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionValue&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; ..
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ProfileSelectionLastUsed&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;last_used_values&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;LastUsedValues) -&amp;gt; Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Deconstruct self.
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            profile_selection: ProfileSelectionLastUsed,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        } = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; profile = last_used_values.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;clone&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        Cmd {
+&lt;&#x2F;span&gt;&lt;span&gt;            profile,
+&lt;&#x2F;span&gt;&lt;span&gt;            other_field,
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The API consumer now has a different &lt;code&gt;build&lt;&#x2F;code&gt; method signature when a last used profile is selected:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Ok!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd = CmdBuilder::new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e78c45;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;with_profile&lt;&#x2F;span&gt;&lt;span&gt;(Profile(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()))
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; Ok!
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; last_used_values = LastUsedValues::new(Profile(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b9ca4a;&quot;&gt;profile&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;into&lt;&#x2F;span&gt;&lt;span&gt;()));
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; _cmd = CmdBuilder::new(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e78c45;&quot;&gt;123&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;with_profile_last_used&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#70c0b1;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;(last_used_values);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In a way, this syntactically looks like method overloading.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;joy&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#joy&quot; aria-label=&quot;Anchor link for: joy&quot;&gt;Joy&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;A nice benefit from compile time safe APIs is, the compiler &#x2F; LSP shows the API consumer what methods can be called from a particular type state. This means even if there is no internet access, one is not lost!&lt;&#x2F;p&gt;
+&lt;p&gt;Instead of every error making you wonder, &quot;what&#x27;s going on?&quot;, every error is the right step forward.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;problems&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#problems&quot; aria-label=&quot;Anchor link for: problems&quot;&gt;Problems&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;While this pattern is great at reducing bugs, applying this pattern to many parameters on the builder is syntax-heavy.&lt;&#x2F;p&gt;
+&lt;p&gt;For example, if there are three fields that must all be set before &lt;code&gt;build()&lt;&#x2F;code&gt; can be called, then &lt;code&gt;CmdBuilder&lt;&#x2F;code&gt; can either have:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;One type parameter, with &lt;code&gt;N1 * N2 * N3&lt;&#x2F;code&gt; different structs as type state:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; `ParamTs`es
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamOneUnset_ParamTwoUnset_ParamThreeUnset;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamOneSet_ParamTwoUnset_ParamThreeUnset(ParamOneValue);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamOneUnset_ParamTwoSet_ParamThreeUnset(ParamTwoValue);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamOneSet_ParamTwoSet_ParamThreeUnset(ParamOneValue, ParamTwoValue);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; ..
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ParamTs&amp;gt; { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;* .. *&#x2F; &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This leads to a quadratic number of &lt;code&gt;impl&lt;&#x2F;code&gt; blocks. &lt;em&gt;shudders&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Quite unwieldy.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;A type parameter for each parameter:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamOneUnset;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamOneSet(ParamOneValue);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamTwoUnset;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamTwoSet(ParamTwoValue);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamThreeUnset;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;ParamThreeSet(ParamThreeValue);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;&#x2F; ..
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;CmdBuilder&amp;lt;ParamOneTs, ParamTwoTs, ParamThreeTs&amp;gt; { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#969896;&quot;&gt;&#x2F;* .. *&#x2F; &lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This leads to.. ugly type parameter propagation for &lt;code&gt;CmdBuilder&lt;&#x2F;code&gt;, should it ever need to be named:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#04091c;color:#eaeaea;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#c397d8;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#7aa6da;&quot;&gt;takes_cmd_builder&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;ParamOneTs, ParamTwoTs, ParamThreeTs&amp;gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d54e53;&quot;&gt;builder&lt;&#x2F;span&gt;&lt;span&gt;: CmdBuilder&amp;lt;ParamOneTs, ParamTwoTs, ParamThreeTs&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;) {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;small&gt;You may prefer type parameter names to all be uppercase acronyms, though I find it more comprehendable to have them named with words.&lt;&#x2F;small&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;ending-note&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#ending-note&quot; aria-label=&quot;Anchor link for: ending-note&quot;&gt;Ending Note&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I&#x27;d really like to uphold the principle of &quot;if it compiles, it works&quot;, because it is such a joy to use. Engineering that kind of empathy into code can be difficult, but with Rust, at least it is possible.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Automation Maturity Levels</title>
+        <published>2023-02-01T00:00:00+00:00</published>
+        <updated>2023-02-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://peace.mk/blog/automation-maturity-levels/"/>
+        <id>https://peace.mk/blog/automation-maturity-levels/</id>
+        
+        <content type="html" xml:base="https://peace.mk/blog/automation-maturity-levels/">&lt;p&gt;Software automation can be classified with the following levels of maturity:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Chaos:&lt;&#x2F;strong&gt; There is no process.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;None:&lt;&#x2F;strong&gt; The process is documented, but is executed manually by a human.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Blind:&lt;&#x2F;strong&gt; Does one thing, without question.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Speaks:&lt;&#x2F;strong&gt; Does one thing, writes messages when executing, and reports success or failure.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Listens:&lt;&#x2F;strong&gt; Takes in parameters, and does different things.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Multi-tasks:&lt;&#x2F;strong&gt; Executes work in parallel.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Thinks:&lt;&#x2F;strong&gt; If the work is already done, does not re-do it.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Translates:&lt;&#x2F;strong&gt; Writes output in human-friendly or computer-friendly formats.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Empathizes:&lt;&#x2F;strong&gt; Presents information in a way that is not overwhelming.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Communicates:&lt;&#x2F;strong&gt; Explains errors at a level that the user understands.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Guides:&lt;&#x2F;strong&gt; Suggests ways to fix errors.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Protects:&lt;&#x2F;strong&gt; Guards users from mistakenly using values that incur high costs.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Saves:&lt;&#x2F;strong&gt; Guards users from mistakenly executing actions with permanent consequences.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Forgives:&lt;&#x2F;strong&gt; Allows users to stop and revert a process when it wasn&#x27;t intended.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Small scale automation such as shell scripts tend to be at level 5, as the number of users is usually small, and their ability to understand technical errors is high.&lt;&#x2F;p&gt;
+&lt;p&gt;As the complexity of the automated process increases, higher levels of maturity are necessary to:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Enable users with less technically-focused roles to use the automation.&lt;&#x2F;li&gt;
+&lt;li&gt;Reduce the mental and emotional load on technical users who have to manage large systems.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Large scale automation may reach higher maturity levels for a subset of the overall process. This means large scale automation still requires substantial effort from users to understand the parts of the automation that are not at those higher levels.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>The Need For A New Framework</title>
+        <published>2023-01-25T00:00:00+00:00</published>
+        <updated>2023-01-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://peace.mk/blog/the-need-for-a-new-framework/"/>
+        <id>https://peace.mk/blog/the-need-for-a-new-framework/</id>
+        
+        <content type="html" xml:base="https://peace.mk/blog/the-need-for-a-new-framework/">&lt;blockquote&gt;
+&lt;p&gt;When there is no automation, you do the work.&lt;&#x2F;p&gt;
+&lt;p&gt;When there is automation, you work for the automation to do the work.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Whenever there is automation, the following work exists:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Development of the automation tool.&lt;&#x2F;li&gt;
+&lt;li&gt;Learning how to use the tool.&lt;&#x2F;li&gt;
+&lt;li&gt;Collecting parameters to pass to the tool.&lt;&#x2F;li&gt;
+&lt;li&gt;Checking the state of things, before running the automation.&lt;&#x2F;li&gt;
+&lt;li&gt;Recording execution progress and outcome for investigation.&lt;&#x2F;li&gt;
+&lt;li&gt;Fixing things when the automation encounters an error.&lt;&#x2F;li&gt;
+&lt;li&gt;Cleaning up when things are no longer needed -- reduce resource usage &#x2F; cost.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Common issues with defining and using automation are:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Not handling all cases.&lt;&#x2F;li&gt;
+&lt;li&gt;Not knowing how long a process takes.&lt;&#x2F;li&gt;
+&lt;li&gt;Not understanding what an error means.&lt;&#x2F;li&gt;
+&lt;li&gt;Not knowing how to resolve an error.&lt;&#x2F;li&gt;
+&lt;li&gt;Unnecessary &#x2F; repetitive waiting.&lt;&#x2F;li&gt;
+&lt;li&gt;Manually copying values between different automation processes.&lt;&#x2F;li&gt;
+&lt;li&gt;Starting an unstoppable process, then realizing something is wrong shortly after.&lt;&#x2F;li&gt;
+&lt;li&gt;Forgetting to clean up.&lt;&#x2F;li&gt;
+&lt;li&gt;Cleaning up, then realizing there is a mistake.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The impacts of these issues include:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;🧠 Mental stress.&lt;&#x2F;li&gt;
+&lt;li&gt;💙 Emotional stress.&lt;&#x2F;li&gt;
+&lt;li&gt;🥹 Loss of morale.&lt;&#x2F;li&gt;
+&lt;li&gt;✊ Inefficient use of effort.&lt;&#x2F;li&gt;
+&lt;li&gt;⏲️ Inefficient use of time.&lt;&#x2F;li&gt;
+&lt;li&gt;💸 Inefficient use of money.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;To reduce these negative impacts, an effective solution should encompass the following concerns &#x2F; considerations:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Low effort to prototype a hacked up solution.&lt;&#x2F;li&gt;
+&lt;li&gt;Progressive effort to turn the prototype into the actual automation tool.&lt;&#x2F;li&gt;
+&lt;li&gt;Compiler support for tracking execution paths.&lt;&#x2F;li&gt;
+&lt;li&gt;Automation based on psychology, not philosophy.&lt;&#x2F;li&gt;
+&lt;li&gt;Present information suitably for the current usage.&lt;&#x2F;li&gt;
+&lt;li&gt;Steps are executed with parallellism and concurrency.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;As much as possible, the solution should shoulder the burden of development from the automation developer -- if developers can focus on business logic, and automatically receive the user-friendly features, then the development experience will not be degraded, which allows them to maintain visible output and provide good user experience.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

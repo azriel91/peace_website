@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVELB8JW90"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QVELB8JW90');
+    </script>
+    
+
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PF3D48Q9');</script>
+    <!-- End Google Tag Manager -->
+    
+
+    <meta charset="UTF-8">
+    <title>Compile Time Correctness: Type State | Peace - Zero Stress Automation </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    
+    <style>
+    :root {
+        --primary-color: #162741;
+        --primary-header-color: #e7faff;
+        --primary-text-color: #d7e7f7;
+        --primary-text-color-over: #ffffff;
+        --primary-link-color: #9b9bab;
+        --secondary-color: #08182c;
+        --secondary-text-color: #b2b2b7;
+        --toc-highlight-text-color: #cceeff;
+        --toc-background-color: #242d3e;
+        --code-color: white;
+        --code-background-color: #04091c;
+
+        --shadow-color: #091823;
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --primary-color: #a8c5dd;
+            --primary-header-color: #041437;
+            --primary-text-color: #082837;
+            --primary-text-color-over: #4488b9;
+            --primary-link-color: #5b5b7b;
+            --secondary-color: #e9f7ff;
+            --secondary-text-color: #606080;
+            --toc-highlight-text-color: #2255aa;
+            --toc-background-color: white;
+            --code-color: white;
+            --code-background-color: #04091c;
+
+            --shadow-color: #c9d7eb;
+        }
+    }
+</style>
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="https://peace.mk/hush.css">
+    <link rel="stylesheet" href="https://peace.mk/breadcrumb.css">
+    
+<link rel="stylesheet" href="https://peace.mk/blog_post.css">
+
+</head>
+
+<body>
+    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=G-QVELB8JW90"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+
+    
+    <header class="box-shadow">
+        
+
+<a href="https://peace.mk/">
+    <div class="logo">
+        <img src="https://peace.mk/img/dove.svg" alt="logo">
+        Peace
+    </div>
+</a>
+
+
+<div class="breadcrumb">
+    
+    
+        
+        
+            
+            
+        
+
+        
+        <div class="breadcrumb_tab">
+            <div class="breadcrumb_link_wrapper">
+                <a class="breadcrumb_link breadcrumb_link_main " href="https://peace.mk/blog/">🪶 Blog</a>
+            </div>
+
+            
+            <div class="breadcrumb_tab_end_wrapper">
+                <div class="breadcrumb_tab_end breadcrumb_tab_end_top"></div>
+                <div class="breadcrumb_tab_end breadcrumb_tab_end_bottom"></div>
+            </div>
+        </div>
+    
+
+    
+
+    
+    
+        <div class="breadcrumb_tab">
+            <div class="breadcrumb_link_wrapper">
+                <a class="breadcrumb_link breadcrumb_link_sub" href="https://peace.mk/blog/compile-time-correctness-type-state/">Compile Time Correctness: Type State</a>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+<nav>
+    
+    
+    <a class="nav-item subtitle-text" href="https://peace.mk/milestones/">🪨 Milestones</a>
+    
+    
+
+    
+    
+    <a class="nav-item subtitle-text" href="https://peace.mk/blog/">🪶 Blog</a>
+    
+
+    
+        
+        <a class="nav-item subtitle-text" href="https://discord.gg/R6HcASbYAj" target="_blank">Discord</a>
+        
+        <a class="nav-item subtitle-text" href="https://github.com/azriel91/peace" target="_blank">Github</a>
+        
+        <a class="nav-item subtitle-text" href="/book/introduction.html" target="_blank">Book</a>
+        
+    
+</nav>
+
+    </header>
+
+    
+    
+
+    
+
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://peace.mk/blog/compile-time-correctness-type-state/#builder-api-runtime-safety-vs-compile-time-safety">Builder API: Runtime Safety vs Compile Time Safety</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://peace.mk/blog/compile-time-correctness-type-state/#runtime-safe"><small>- Runtime Safe</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://peace.mk/blog/compile-time-correctness-type-state/#compile-time-safe"><small>- Compile Time Safe</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://peace.mk/blog/compile-time-correctness-type-state/#more-variants">More Variants</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://peace.mk/blog/compile-time-correctness-type-state/#joy">Joy</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://peace.mk/blog/compile-time-correctness-type-state/#problems">Problems</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://peace.mk/blog/compile-time-correctness-type-state/#ending-note">Ending Note</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<div class="heading-text">Compile Time Correctness: Type State</div>
+
+<div id="post-info">
+    <div class="date">
+        <span id="publish">2023-02-17</span>
+        </div>
+    <div class="tags">
+        <span class="tag"><span>design_patterns</span></span>
+    </div>
+</div>
+
+<blockquote>
+<p>This post is code heavy, and is best viewed on a large screen.</p>
+</blockquote>
+<p>Recently I have gotten into "compile-time-safe-but-still-ergonomic" API obsession.</p>
+<p>This post will demonstrate an implementation of the type state design pattern, where methods are not able to be called until calling them is a valid operation.</p>
+<p>Future posts will cover how maintaining compile-time safety <em>while keeping the API ergonomic</em> becomes increasingly difficult to maintain, and approaches used to address these burdens.</p>
+<h2 id="builder-api-runtime-safety-vs-compile-time-safety"><a class="zola-anchor" href="#builder-api-runtime-safety-vs-compile-time-safety" aria-label="Anchor link for: builder-api-runtime-safety-vs-compile-time-safety">Builder API: Runtime Safety vs Compile Time Safety</a></h2>
+<p>For starters, let's look at a simple case of creating a compile-time safe API using type state.</p>
+<p>We want to create a <code>Cmd</code> that contains the following two fields:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">struct </span><span>Cmd {
+</span><span>    </span><span style="color:#d54e53;">profile</span><span>: Profile,
+</span><span>    </span><span style="color:#d54e53;">other_field</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">struct </span><span>Profile(String);
+</span></code></pre>
+<p>We will compare a runtime safe builder API to a compile-time safe builder API.</p>
+<h3 id="runtime-safe"><a class="zola-anchor" href="#runtime-safe" aria-label="Anchor link for: runtime-safe">Runtime Safe</a></h3>
+<p>For this API, this is the usage we want to end up with:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() {
+</span><span>    </span><span style="color:#969896;">// Ok!
+</span><span>    </span><span style="color:#c397d8;">let</span><span> _cmd = CmdBuilder::new(</span><span style="color:#e78c45;">123</span><span>)
+</span><span>        .</span><span style="color:#70c0b1;">with_profile</span><span>(Profile(&quot;</span><span style="color:#b9ca4a;">profile</span><span>&quot;.</span><span style="color:#70c0b1;">into</span><span>()))
+</span><span>        .</span><span style="color:#70c0b1;">build</span><span>()
+</span><span>        .</span><span style="color:#70c0b1;">unwrap</span><span>();
+</span><span>
+</span><span>    </span><span style="color:#969896;">// Runtime error!
+</span><span>    </span><span style="color:#c397d8;">let</span><span> _cmd = CmdBuilder::new(</span><span style="color:#e78c45;">123</span><span>)
+</span><span>        .</span><span style="color:#70c0b1;">build</span><span>()
+</span><span>        .</span><span style="color:#70c0b1;">unwrap</span><span>();
+</span><span>    </span><span style="color:#969896;">// thread &#39;main&#39; panicked at &#39;called `Result::unwrap()` on an `Err` value: &quot;Cmd profile must be selected&quot;&#39;, src/main.rs:11:10
+</span><span>}
+</span></code></pre>
+<p>Notably, <code>builder.build()</code> may fail at runtime, but it is "runtime safe" because it isn't possible to have a <code>Cmd</code> without unwrapping the result. At compile time, an API consumer is informed that "this is fallible" through a <code>Result&lt;Cmd, String&gt;</code>.</p>
+<p>This <code>CmdBuilder</code> API has the following:</p>
+<ul>
+<li>A <code>new</code> function which initializes the profile to a placeholder "unset" value.</li>
+<li>A <code>with_profile</code> function which sets the profile.</li>
+<li>A <code>build</code> function which fails if the profile has not been set.</li>
+</ul>
+<p>Code:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">enum </span><span>ProfileSelection {
+</span><span>    None,
+</span><span>    Value(Profile),
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">struct </span><span>CmdBuilder {
+</span><span>    </span><span style="color:#d54e53;">profile_selection</span><span>: ProfileSelection,
+</span><span>    </span><span style="color:#d54e53;">other_field</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">impl </span><span>CmdBuilder {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">new</span><span>(</span><span style="color:#d54e53;">other_field</span><span>: </span><span style="color:#c397d8;">u32</span><span>) -&gt; </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>        </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>            profile_selection: ProfileSelection::None,
+</span><span>            other_field,
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">with_profile</span><span>(</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>, </span><span style="color:#d54e53;">profile</span><span>: Profile) -&gt; </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.profile_selection = ProfileSelection::Value(profile);
+</span><span>        </span><span style="color:#d54e53;">self
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">build</span><span>(</span><span style="color:#d54e53;">self</span><span>) -&gt; Result&lt;Cmd, String&gt; {
+</span><span>        </span><span style="color:#969896;">// Deconstruct self.
+</span><span>        </span><span style="color:#c397d8;">let Self </span><span>{
+</span><span>            profile_selection,
+</span><span>            other_field,
+</span><span>        } = </span><span style="color:#d54e53;">self</span><span>;
+</span><span>
+</span><span>        </span><span style="color:#c397d8;">let</span><span> profile = </span><span style="color:#c397d8;">match</span><span> profile_selection {
+</span><span>            ProfileSelection::None =&gt; </span><span style="color:#c397d8;">return </span><span>Err(&quot;</span><span style="color:#b9ca4a;">Cmd profile must be selected</span><span>&quot;.</span><span style="color:#70c0b1;">into</span><span>()),
+</span><span>            ProfileSelection::Value(profile) =&gt; profile,
+</span><span>        };
+</span><span>
+</span><span>        Ok(Cmd {
+</span><span>            profile,
+</span><span>            other_field,
+</span><span>        })
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#d54e53;">allow</span><span>(dead_code)]
+</span><span style="color:#c397d8;">struct </span><span>Cmd {
+</span><span>    </span><span style="color:#d54e53;">profile</span><span>: Profile,
+</span><span>    </span><span style="color:#d54e53;">other_field</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">struct </span><span>Profile(String);
+</span></code></pre>
+<h3 id="compile-time-safe"><a class="zola-anchor" href="#compile-time-safe" aria-label="Anchor link for: compile-time-safe">Compile Time Safe</a></h3>
+<p>For this API, this is the usage we want to end up with:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() {
+</span><span>    </span><span style="color:#969896;">// Ok!
+</span><span>    </span><span style="color:#c397d8;">let</span><span> _cmd = CmdBuilder::new(</span><span style="color:#e78c45;">123</span><span>)
+</span><span>        .</span><span style="color:#70c0b1;">with_profile</span><span>(Profile(&quot;</span><span style="color:#b9ca4a;">profile</span><span>&quot;.</span><span style="color:#70c0b1;">into</span><span>()))
+</span><span>        .</span><span style="color:#70c0b1;">build</span><span>();
+</span><span>
+</span><span>    </span><span style="color:#969896;">// Compile error!
+</span><span>    </span><span style="color:#c397d8;">let</span><span> _cmd = CmdBuilder::new(</span><span style="color:#e78c45;">123</span><span>).</span><span style="color:#70c0b1;">build</span><span>();
+</span><span>    </span><span style="color:#969896;">//    |                         ^^^^^ method not found in `CmdBuilder&lt;ProfileSelectionNone&gt;`
+</span><span>    </span><span style="color:#969896;">// ...
+</span><span>    </span><span style="color:#969896;">// 15 | struct CmdBuilder&lt;ProfileSelection&gt; {
+</span><span>    </span><span style="color:#969896;">//    | -------------------------------------- method `build` not found for this struct
+</span><span>    </span><span style="color:#969896;">//    |
+</span><span>    </span><span style="color:#969896;">//    = note: the method was found for
+</span><span>    </span><span style="color:#969896;">//            - `CmdBuilder&lt;ProfileSelectionValue&gt;`
+</span><span>}
+</span></code></pre>
+<p>In this case, <code>builder.build()</code> is not fallible -- it returns a <code>Cmd</code>  instead of a <code>Result&lt;Cmd, _&gt;</code>.</p>
+<p>This <code>CmdBuilder</code> API has the following:</p>
+<ul>
+<li>A <code>new</code> function which exists for an unset profile type state.</li>
+<li>A <code>with_profile</code> function which sets the profile for that type state.</li>
+<li>A <code>build</code> function cannot even be called if the profile isn't set.</li>
+<li><code>with_profile</code> cannot be called twice, making it impossible for overwrites.</li>
+</ul>
+<p>With this approach, an API consumer does not have to propagate the error up to the user, because <em>there is none</em>.</p>
+<p>Code:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#969896;">// Type states
+</span><span style="color:#c397d8;">struct </span><span>ProfileSelectionNone;
+</span><span style="color:#c397d8;">struct </span><span>ProfileSelectionValue(Profile);
+</span><span>
+</span><span style="color:#c397d8;">struct </span><span>CmdBuilder&lt;ProfileSelection&gt; {
+</span><span>    </span><span style="color:#d54e53;">profile_selection</span><span>: ProfileSelection,
+</span><span>    </span><span style="color:#d54e53;">other_field</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">impl </span><span>CmdBuilder&lt;ProfileSelectionNone&gt; {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">new</span><span>(</span><span style="color:#d54e53;">other_field</span><span>: </span><span style="color:#c397d8;">u32</span><span>) -&gt; </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>        </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>            profile_selection: ProfileSelectionNone,
+</span><span>            other_field,
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">with_profile</span><span>(</span><span style="color:#d54e53;">self</span><span>, </span><span style="color:#d54e53;">profile</span><span>: Profile) -&gt; CmdBuilder&lt;ProfileSelectionValue&gt; {
+</span><span>        </span><span style="color:#c397d8;">let Self </span><span>{
+</span><span>            profile_selection: _,
+</span><span>            other_field,
+</span><span>        } = </span><span style="color:#d54e53;">self</span><span>;
+</span><span>
+</span><span>        </span><span style="color:#c397d8;">let</span><span> profile_selection = ProfileSelectionValue(profile);
+</span><span>        CmdBuilder {
+</span><span>            profile_selection,
+</span><span>            other_field,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">impl </span><span>CmdBuilder&lt;ProfileSelectionValue&gt; {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">build</span><span>(</span><span style="color:#d54e53;">self</span><span>) -&gt; Cmd {
+</span><span>        </span><span style="color:#969896;">// Deconstruct self.
+</span><span>        </span><span style="color:#c397d8;">let Self </span><span>{
+</span><span>            profile_selection: ProfileSelectionValue(profile),
+</span><span>            other_field,
+</span><span>        } = </span><span style="color:#d54e53;">self</span><span>;
+</span><span>
+</span><span>        Cmd {
+</span><span>            profile,
+</span><span>            other_field,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#d54e53;">allow</span><span>(dead_code)]
+</span><span style="color:#c397d8;">struct </span><span>Cmd {
+</span><span>    </span><span style="color:#d54e53;">profile</span><span>: Profile,
+</span><span>    </span><span style="color:#d54e53;">other_field</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">struct </span><span>Profile(String);
+</span></code></pre>
+<h2 id="more-variants"><a class="zola-anchor" href="#more-variants" aria-label="Anchor link for: more-variants">More Variants</a></h2>
+<p>Seems nice. What if there are more variants to selecting a profile?</p>
+<p>The following shows what it would be like to add more variants while keeping compile-time safety:</p>
+<ol>
+<li>
+<p>First, we need to add another type state type.</p>
+<pre data-lang="diff" style="background-color:#04091c;color:#eaeaea;" class="language-diff "><code class="language-diff" data-lang="diff"><span> // Type states
+</span><span> struct ProfileSelectionNone;
+</span><span> struct ProfileSelectionValue(Profile);
+</span><span style="color:#b9ca4a;">+/// Use the last used profile
+</span><span style="color:#b9ca4a;">+struct ProfileSelectionLastUsed;
+</span></code></pre>
+</li>
+<li>
+<p>Next, add behaviour to the relevant <code>impl</code> blocks:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">impl </span><span>CmdBuilder&lt;ProfileSelectionNone&gt; {
+</span><span>    </span><span style="color:#969896;">// fn new ..
+</span><span>
+</span><span>    </span><span style="color:#969896;">// fn with_profile ..
+</span><span>
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">with_profile_last_used</span><span>(</span><span style="color:#d54e53;">self</span><span>) -&gt; CmdBuilder&lt;ProfileSelectionLastUsed&gt; {
+</span><span>        </span><span style="color:#c397d8;">let Self </span><span>{
+</span><span>            profile_selection: _,
+</span><span>            other_field,
+</span><span>        } = </span><span style="color:#d54e53;">self</span><span>;
+</span><span>
+</span><span>        </span><span style="color:#c397d8;">let</span><span> profile_selection = ProfileSelectionLastUsed;
+</span><span>        CmdBuilder {
+</span><span>            profile_selection,
+</span><span>            other_field,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">impl </span><span>CmdBuilder&lt;ProfileSelectionValue&gt; {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">build</span><span>(</span><span style="color:#d54e53;">self</span><span>) -&gt; Cmd {
+</span><span>        </span><span style="color:#969896;">// ..
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#c397d8;">impl </span><span>CmdBuilder&lt;ProfileSelectionLastUsed&gt; {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">build</span><span>(</span><span style="color:#d54e53;">self</span><span>, </span><span style="color:#d54e53;">last_used_values</span><span>: &amp;LastUsedValues) -&gt; Cmd {
+</span><span>        </span><span style="color:#969896;">// Deconstruct self.
+</span><span>        </span><span style="color:#c397d8;">let Self </span><span>{
+</span><span>            profile_selection: ProfileSelectionLastUsed,
+</span><span>            other_field,
+</span><span>        } = </span><span style="color:#d54e53;">self</span><span>;
+</span><span>
+</span><span>        </span><span style="color:#c397d8;">let</span><span> profile = last_used_values.</span><span style="color:#70c0b1;">profile</span><span>().</span><span style="color:#70c0b1;">clone</span><span>();
+</span><span>
+</span><span>        Cmd {
+</span><span>            profile,
+</span><span>            other_field,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+</li>
+<li>
+<p>The API consumer now has a different <code>build</code> method signature when a last used profile is selected:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() {
+</span><span>    </span><span style="color:#969896;">// Ok!
+</span><span>    </span><span style="color:#c397d8;">let</span><span> _cmd = CmdBuilder::new(</span><span style="color:#e78c45;">123</span><span>)
+</span><span>        .</span><span style="color:#70c0b1;">with_profile</span><span>(Profile(&quot;</span><span style="color:#b9ca4a;">profile</span><span>&quot;.</span><span style="color:#70c0b1;">into</span><span>()))
+</span><span>        .</span><span style="color:#70c0b1;">build</span><span>();
+</span><span>
+</span><span>    </span><span style="color:#969896;">// Ok!
+</span><span>    </span><span style="color:#c397d8;">let</span><span> last_used_values = LastUsedValues::new(Profile(&quot;</span><span style="color:#b9ca4a;">profile</span><span>&quot;.</span><span style="color:#70c0b1;">into</span><span>()));
+</span><span>    </span><span style="color:#c397d8;">let</span><span> _cmd = CmdBuilder::new(</span><span style="color:#e78c45;">123</span><span>)
+</span><span>        .</span><span style="color:#70c0b1;">with_profile_last_used</span><span>()
+</span><span>        .</span><span style="color:#70c0b1;">build</span><span>(last_used_values);
+</span><span>}
+</span></code></pre>
+<p>In a way, this syntactically looks like method overloading.</p>
+</li>
+</ol>
+<h2 id="joy"><a class="zola-anchor" href="#joy" aria-label="Anchor link for: joy">Joy</a></h2>
+<p>A nice benefit from compile time safe APIs is, the compiler / LSP shows the API consumer what methods can be called from a particular type state. This means even if there is no internet access, one is not lost!</p>
+<p>Instead of every error making you wonder, "what's going on?", every error is the right step forward.</p>
+<h2 id="problems"><a class="zola-anchor" href="#problems" aria-label="Anchor link for: problems">Problems</a></h2>
+<p>While this pattern is great at reducing bugs, applying this pattern to many parameters on the builder is syntax-heavy.</p>
+<p>For example, if there are three fields that must all be set before <code>build()</code> can be called, then <code>CmdBuilder</code> can either have:</p>
+<ul>
+<li>
+<p>One type parameter, with <code>N1 * N2 * N3</code> different structs as type state:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#969896;">// `ParamTs`es
+</span><span style="color:#c397d8;">struct </span><span>ParamOneUnset_ParamTwoUnset_ParamThreeUnset;
+</span><span style="color:#c397d8;">struct </span><span>ParamOneSet_ParamTwoUnset_ParamThreeUnset(ParamOneValue);
+</span><span style="color:#c397d8;">struct </span><span>ParamOneUnset_ParamTwoSet_ParamThreeUnset(ParamTwoValue);
+</span><span style="color:#c397d8;">struct </span><span>ParamOneSet_ParamTwoSet_ParamThreeUnset(ParamOneValue, ParamTwoValue);
+</span><span style="color:#969896;">// ..
+</span><span>
+</span><span style="color:#c397d8;">struct </span><span>CmdBuilder&lt;ParamTs&gt; { </span><span style="color:#969896;">/* .. */ </span><span>}
+</span></code></pre>
+<p>This leads to a quadratic number of <code>impl</code> blocks. <em>shudders</em></p>
+<p>Quite unwieldy.</p>
+</li>
+<li>
+<p>A type parameter for each parameter:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">struct </span><span>ParamOneUnset;
+</span><span style="color:#c397d8;">struct </span><span>ParamOneSet(ParamOneValue);
+</span><span style="color:#c397d8;">struct </span><span>ParamTwoUnset;
+</span><span style="color:#c397d8;">struct </span><span>ParamTwoSet(ParamTwoValue);
+</span><span style="color:#c397d8;">struct </span><span>ParamThreeUnset;
+</span><span style="color:#c397d8;">struct </span><span>ParamThreeSet(ParamThreeValue);
+</span><span style="color:#969896;">// ..
+</span><span>
+</span><span style="color:#c397d8;">struct </span><span>CmdBuilder&lt;ParamOneTs, ParamTwoTs, ParamThreeTs&gt; { </span><span style="color:#969896;">/* .. */ </span><span>}
+</span></code></pre>
+<p>This leads to.. ugly type parameter propagation for <code>CmdBuilder</code>, should it ever need to be named:</p>
+<pre data-lang="rust" style="background-color:#04091c;color:#eaeaea;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">takes_cmd_builder</span><span>&lt;ParamOneTs, ParamTwoTs, ParamThreeTs&gt;(
+</span><span>    </span><span style="color:#d54e53;">builder</span><span>: CmdBuilder&lt;ParamOneTs, ParamTwoTs, ParamThreeTs&gt;,
+</span><span>) {}
+</span></code></pre>
+<p><small>You may prefer type parameter names to all be uppercase acronyms, though I find it more comprehendable to have them named with words.</small></p>
+</li>
+</ul>
+<h2 id="ending-note"><a class="zola-anchor" href="#ending-note" aria-label="Anchor link for: ending-note">Ending Note</a></h2>
+<p>I'd really like to uphold the principle of "if it compiles, it works", because it is such a joy to use. Engineering that kind of empathy into code can be difficult, but with Rust, at least it is possible.</p>
+
+
+<div class="post_nav">
+
+<a class="post_nav_button" href="https:&#x2F;&#x2F;peace.mk&#x2F;blog&#x2F;automation-maturity-levels&#x2F;">&lt; Prev</a>
+
+
+<!-- Empty spacer -->
+<div></div>
+
+
+<a class="post_nav_button" href="https:&#x2F;&#x2F;peace.mk&#x2F;blog&#x2F;conceptual-introduction&#x2F;">Next &gt;</a>
+
+</div>
+
+
+        </div>
+
+        <!-- For spacing -->
+        
+        <div class="sidebar"></div>
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            made with <a href="https://github.com/azriel91/hush">🪶 hush</a> © 2025
+        </small>
+    </footer>
+    
+</body>
+
+<script>
+    const scrollHandler = entries => {
+        // Find the first entry which intersecting and ratio > 0.9 to highlight.
+        let entry = entries.find(entry => {
+            return entry.isIntersecting && entry.intersectionRatio > 0.9;
+        });
+        if (!entry) return;
+
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        // let url = new URL(`#${entry.target.id}`);
+        let link = document.querySelector(`.toc a[href$="${decodeURIComponent(`#${entry.target.id}`)}"]`)
+        if (link) {
+            link.classList.add("active");
+            link.scrollIntoView({ behavior: "auto", block: "nearest" });
+        }
+    };
+    // Set -100px root margin to improve highlight experience.
+    const observer = new IntersectionObserver(scrollHandler, { threshold: 1 });
+    let items = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+    items.forEach(item => observer.observe(item));
+</script>
+
+</html>
